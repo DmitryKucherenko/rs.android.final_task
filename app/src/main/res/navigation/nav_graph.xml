@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/jokesList">
+    <fragment
+        android:id="@+id/jokesList"
+        android:name="com.fatalzero.rsandroidfinal_task.presentation.JokesList"
+        android:label="jokes_list_fragment"
+        tools:layout="@layout/jokes_list_fragment" >
+        <action
+            android:id="@+id/action_jokesList_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.fatalzero.rsandroidfinal_task.presentation.SettingsFragment"
+        android:label="SettingsFragment" />
+</navigation>
