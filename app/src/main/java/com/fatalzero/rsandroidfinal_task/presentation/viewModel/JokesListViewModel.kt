@@ -17,6 +17,7 @@ class JokesListViewModel(application: Application) : ViewModel() {
 
     init {
         (application as App).appComponent.inject(this)
+        println("view model!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     @Inject
