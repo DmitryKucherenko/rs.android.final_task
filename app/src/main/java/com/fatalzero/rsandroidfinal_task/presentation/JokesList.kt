@@ -8,10 +8,12 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.databinding.JokesListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.adapter.ItemClickListener
@@ -19,11 +21,20 @@ import com.fatalzero.rsandroidfinal_task.presentation.adapter.JokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.adapter.LoaderStateAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.viewModel.JokesListViewModel
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 class JokesList : Fragment() {
     private var jokeRecyclerView: RecyclerView? = null
-    private val viewModel: JokesListViewModel by viewModels {
-        JokesListViewModel.JokesListViewModelFactory(requireActivity().application)
+
+    private val component by lazy{
+        (requireActivity().application as App).appComponent
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this,viewModelFactory)[JokesListViewModel::class.java]
     }
     private var _binding: JokesListFragmentBinding? = null
     private val binding get() = _binding!!
@@ -35,6 +46,7 @@ class JokesList : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }

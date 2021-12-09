@@ -3,6 +3,8 @@ package com.fatalzero.rsandroidfinal_task.di
 import android.app.Application
 import android.content.Context
 import com.fatalzero.rsandroidfinal_task.data.network.ApiFactory
+import com.fatalzero.rsandroidfinal_task.presentation.JokesList
+import com.fatalzero.rsandroidfinal_task.presentation.MainActivity
 import com.fatalzero.rsandroidfinal_task.presentation.viewModel.JokesListViewModel
 import com.fatalzero.rsandroidfinal_task.presentation.viewModel.MainActivityViewModel
 import dagger.BindsInstance
@@ -10,7 +12,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [JokeListModule::class, NetWorkModule::class, MainActivityModule::class])
+@Component(modules = [JokeListModule::class, NetWorkModule::class, MainActivityModule::class, ViewModelModule::class])
 interface AppComponent {
 
     @Component.Factory
@@ -20,9 +22,9 @@ interface AppComponent {
     }
 
 
-    fun inject(fragment: JokesListViewModel)
     fun inject(apiFactory: ApiFactory)
-    fun inject(mainActivityViewModel: MainActivityViewModel) {
+    fun inject(mainActivity: MainActivity)
+    fun inject(jokesList: JokesList)
 
-    }
+
 }

@@ -13,24 +13,9 @@ import com.fatalzero.rsandroidfinal_task.presentation.adapter.JokePagingSource
 import javax.inject.Inject
 
 
-class JokesListViewModel(application: Application) : ViewModel() {
+class JokesListViewModel @Inject constructor(var jokeSendUseCase: JokeSendUseCase,jokePagingSource:JokePagingSource) : ViewModel() {
 
-    init {
-        (application as App).appComponent.inject(this)
-        println("view model!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    }
-
-    @Inject
-    lateinit var repository: JokesListRepositoryImpl
-
-
-    @Inject
-    lateinit var jokeSendUseCase :JokeSendUseCase
-
-    @Inject
-    lateinit var  jokePagingSource:JokePagingSource
-
-    val jokeFlowData = Pager(
+      val jokeFlowData = Pager(
         config = PagingConfig(pageSize = 1, enablePlaceholders = false),
         pagingSourceFactory = { jokePagingSource }
     ).flow
@@ -40,16 +25,7 @@ class JokesListViewModel(application: Application) : ViewModel() {
     }
 
 
-    class JokesListViewModelFactory(private val application: Application) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(JokesListViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return JokesListViewModel(application) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
-    }
+
 
 
 }

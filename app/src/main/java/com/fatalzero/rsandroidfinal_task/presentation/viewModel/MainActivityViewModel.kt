@@ -15,21 +15,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
-class MainActivityViewModel (application: Application) :ViewModel() {
+class MainActivityViewModel @Inject constructor (var getSettingsUseCase: GetSettingsUseCase,var saveSettingUseCase: SaveSettingsUseCase) :ViewModel() {
 
-    @Inject
-    lateinit var getSettingsUseCase: GetSettingsUseCase
-    @Inject
-    lateinit var saveSettingUseCase: SaveSettingsUseCase
 
 
 
     private val _isDarkTheme = MutableStateFlow<Boolean>(false)
     val isDarkTheme: StateFlow<Boolean> = _isDarkTheme.asStateFlow()
 
-    init {
-        (application as App).appComponent.inject(this)
-    }
+
 
     fun saveSetting(isDarkTheme: Boolean) {
         val param = UserSettings(isDarkTheme)
@@ -42,14 +36,5 @@ class MainActivityViewModel (application: Application) :ViewModel() {
     }
 
 
-    class MainActivityViewModelFactory(private val application: Application) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(MainActivityViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return MainActivityViewModel(application) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
-    }
+
 }
