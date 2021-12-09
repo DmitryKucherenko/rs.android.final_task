@@ -14,7 +14,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val themePreference = findPreference<SwitchPreference>("switch")
         themePreference?.setOnPreferenceChangeListener { _, _ ->
             ThemeManager.reverseTheme()
-         //   requireActivity().recreate()
             true
         }
     }

@@ -7,32 +7,36 @@ import com.fatalzero.rsandroidfinal_task.domain.IJokesListUseCase
 import com.fatalzero.rsandroidfinal_task.domain.JokeSendUseCase
 import com.fatalzero.rsandroidfinal_task.domain.repository.JokesListRepository
 import com.fatalzero.rsandroidfinal_task.domain.JokesListUseCase
+import com.fatalzero.rsandroidfinal_task.domain.SendJoke
 import com.fatalzero.rsandroidfinal_task.presentation.adapter.JokePagingSource
 import com.fatalzero.rsandroidfinal_task.utils.SendJokeImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class JokeListModule {
-    @Singleton
-    @Provides
-    fun getRepository(jokesApiService: ApiService): JokesListRepository =
-        JokesListRepositoryImpl(jokesApiService)
+interface JokeListModule {
+
 
     @Singleton
-    @Provides
-    fun getListUseCase(repository: JokesListRepository): IJokesListUseCase =
-        JokesListUseCase(repository)
+    @Binds
+    fun bindJokeListRepository(jokesListRepositoryImpl: JokesListRepositoryImpl):JokesListRepository
 
     @Singleton
-    @Provides
-    fun getJokeSendUseCase(context: Context): JokeSendUseCase = JokeSendUseCase(SendJokeImpl(context))
+    @Binds
+    fun bindJokeListUseCase (jokesListUseCase: JokesListUseCase):IJokesListUseCase
 
     @Singleton
-    @Provides
-    fun getJokePagingSource(jokesListUseCase: IJokesListUseCase): JokePagingSource = JokePagingSource(jokesListUseCase)
+    @Binds
+    fun bindSendJoke(sendJokeImpl: SendJokeImpl):SendJoke
 
+
+    @Singleton
+    fun getJokeSendUseCase(context: Context): JokeSendUseCase
+
+    @Singleton
+    fun getJokePagingSource(jokesListUseCase: IJokesListUseCase): JokePagingSource
 }
 
 

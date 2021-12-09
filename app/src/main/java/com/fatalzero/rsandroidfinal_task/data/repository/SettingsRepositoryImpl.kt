@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.preference.PreferenceManager
 import com.fatalzero.rsandroidfinal_task.domain.model.UserSettings
 import com.fatalzero.rsandroidfinal_task.domain.repository.SettingsRepository
+import javax.inject.Inject
 
 private const val KEY_IS_DARK_THEME = "switch"
 
-class SettingsRepositoryImpl(var context: Context) : SettingsRepository {
+class SettingsRepositoryImpl @Inject constructor(var context: Context) : SettingsRepository {
 
     private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 

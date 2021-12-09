@@ -7,8 +7,9 @@ import com.fatalzero.rsandroidfinal_task.domain.IJokesListUseCase
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class JokePagingSource(private val jokesListUseCase: IJokesListUseCase) :
+class JokePagingSource @Inject constructor(private val jokesListUseCase: IJokesListUseCase) :
     PagingSource<Int, Joke>() {
     override fun getRefreshKey(state: PagingState<Int, Joke>): Int? {
         return state.anchorPosition
