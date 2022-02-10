@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/change_theme"
-        android:icon="@drawable/ic_setting"
-        android:title="@string/night_theme"
-        app:showAsAction="ifRoom|withText"/>
+        android:id="@+id/jokesList"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home"
 
+        />
+    <item
+        android:id="@+id/bookMarksFragment"
+        android:icon="@drawable/ic_baseline_collections_bookmark_24"
+        android:title="Bookmarks" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_setting"
+        android:title="Settings"
+        app:showAsAction="ifRoom|withText" />
 </menu>

@@ -4,9 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingSource
 import com.fatalzero.rsandroidfinal_task.data.mapper.JokeMapper
 import com.fatalzero.rsandroidfinal_task.data.network.model.JokeNet
-import com.fatalzero.rsandroidfinal_task.domain.IJokesListUseCase
+import com.fatalzero.rsandroidfinal_task.domain.usecase.IJokesListUseCase
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
-import com.fatalzero.rsandroidfinal_task.presentation.adapter.JokePagingSource
+import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokePagingSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule

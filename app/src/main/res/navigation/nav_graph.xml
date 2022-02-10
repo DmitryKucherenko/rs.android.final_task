@@ -6,16 +6,23 @@
     app:startDestination="@id/jokesList">
     <fragment
         android:id="@+id/jokesList"
-        android:name="com.fatalzero.rsandroidfinal_task.presentation.JokesList"
+        android:name="com.fatalzero.rsandroidfinal_task.presentation.JokeList.JokesList"
         android:label="jokes_list_fragment"
-        tools:layout="@layout/jokes_list_fragment" >
+        tools:layout="@layout/jokes_list_fragment">
         <action
             android:id="@+id/action_jokesList_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:popUpToInclusive="false" />
+            app:destination="@id/settingsFragment"/>
+        <action
+            android:id="@+id/action_jokesList_to_bookMarksFragment"
+            app:destination="@id/bookMarksFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.fatalzero.rsandroidfinal_task.presentation.SettingsFragment"
+        android:name="com.fatalzero.rsandroidfinal_task.presentation.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/bookMarksFragment"
+        android:name="com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.FauvoriteListFragment"
+        android:label="book_marks_fragment"
+        tools:layout="@layout/fauvorite_joke_list_fragment" />
 </navigation>

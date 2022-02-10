@@ -1,4 +1,4 @@
-package com.fatalzero.rsandroidfinal_task.presentation
+package com.fatalzero.rsandroidfinal_task.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

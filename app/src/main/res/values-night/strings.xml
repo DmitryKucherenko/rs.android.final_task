@@ -2,4 +2,6 @@
 <resources>
     <string name="refresh_button">Refresh</string>
     <string name="night_theme">Day</string>
+    <string name="share_buton">share buton</string>
+    <string name="save_buton">save buton</string>
 </resources>

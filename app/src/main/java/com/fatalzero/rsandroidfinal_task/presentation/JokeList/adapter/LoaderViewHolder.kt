@@ -1,4 +1,4 @@
-package com.fatalzero.rsandroidfinal_task.presentation.adapter
+package com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter
 
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.paging.LoadState

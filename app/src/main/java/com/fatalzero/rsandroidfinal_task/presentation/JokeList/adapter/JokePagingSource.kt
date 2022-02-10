@@ -1,9 +1,9 @@
-package com.fatalzero.rsandroidfinal_task.presentation.adapter
+package com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.fatalzero.rsandroidfinal_task.data.network.ApiService.Companion.MAX_PAGE_SIZE
-import com.fatalzero.rsandroidfinal_task.domain.IJokesListUseCase
+import com.fatalzero.rsandroidfinal_task.domain.usecase.IJokesListUseCase
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import retrofit2.HttpException
 import java.io.IOException

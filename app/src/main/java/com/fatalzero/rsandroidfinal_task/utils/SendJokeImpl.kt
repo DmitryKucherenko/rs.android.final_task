@@ -4,8 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat.startActivity
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
-import com.fatalzero.rsandroidfinal_task.domain.SendJoke
+import com.fatalzero.rsandroidfinal_task.domain.usecase.SendJoke
+
 import javax.inject.Inject
+
+
+
+
 
 class SendJokeImpl @Inject constructor(val context: Context) : SendJoke {
 

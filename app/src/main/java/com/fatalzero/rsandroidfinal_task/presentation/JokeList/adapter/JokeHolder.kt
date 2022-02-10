@@ -1,4 +1,4 @@
-package com.fatalzero.rsandroidfinal_task.presentation.adapter
+package com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -14,11 +14,15 @@ class JokeHolder(
     private val jokeText = binding.jokeText
     private val category = binding.categoryText
     private val share = binding.shareButton
+    private val save = binding.saveButton
     fun bind(joke: Joke?) {
         jokeText.text = joke?.joke
         category.text = "Category: ${joke?.category}"
         share.setOnClickListener {
             itemClickListener?.onItemClick(joke)
+        }
+        save.setOnClickListener {
+            itemClickListener?.onSaveItemClick(joke)
         }
     }
 }

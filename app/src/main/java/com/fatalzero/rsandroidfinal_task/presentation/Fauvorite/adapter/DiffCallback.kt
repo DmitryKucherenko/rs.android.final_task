@@ -1,4 +1,4 @@
-package com.fatalzero.rsandroidfinal_task.presentation.adapter
+package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 

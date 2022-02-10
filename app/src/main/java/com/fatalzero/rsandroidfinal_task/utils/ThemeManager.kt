@@ -12,6 +12,10 @@ class ThemeManager {
             }
         }
 
+        fun getCurrentTheme():Int{
+            return AppCompatDelegate.getDefaultNightMode()
+        }
+
         fun setDayTheme(){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }

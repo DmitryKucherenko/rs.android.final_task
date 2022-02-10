@@ -1,4 +1,4 @@
-package com.fatalzero.rsandroidfinal_task.presentation
+package com.fatalzero.rsandroidfinal_task.presentation.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
