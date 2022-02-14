@@ -83,7 +83,7 @@ class FauvoriteListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("FauvoriteListFragment", "create")
+
     }
 
     override fun onDestroyView() {

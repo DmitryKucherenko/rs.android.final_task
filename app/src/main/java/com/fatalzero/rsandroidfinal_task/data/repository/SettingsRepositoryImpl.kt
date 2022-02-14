@@ -4,21 +4,36 @@ import android.content.Context
 import androidx.preference.PreferenceManager
 import com.fatalzero.rsandroidfinal_task.domain.model.UserSettings
 import com.fatalzero.rsandroidfinal_task.domain.repository.SettingsRepository
+import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
+import java.lang.Exception
+import java.security.spec.ECField
 import javax.inject.Inject
 
 private const val KEY_IS_DARK_THEME = "switch"
 
 class SettingsRepositoryImpl @Inject constructor(var context: Context) : SettingsRepository {
+    @Inject
+    lateinit var showMessage: ShowMessage
 
     private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 
     override fun saveSettings(userSettings: UserSettings): Boolean {
-        sharedPreferences.edit().putBoolean(KEY_IS_DARK_THEME,userSettings.isDarkTheme).apply()
-        return true
+        try {
+            sharedPreferences.edit().putBoolean(KEY_IS_DARK_THEME, userSettings.isDarkTheme).apply()
+            return true
+        }catch (e:Exception){
+            showMessage(e.toString())
+            throw e
+        }
     }
 
     override fun getSettings(): UserSettings {
-         val isDarkThemeSP = sharedPreferences.getBoolean(KEY_IS_DARK_THEME, false)
-        return UserSettings(isDarkTheme = isDarkThemeSP)
+        try {
+            val isDarkThemeSP = sharedPreferences.getBoolean(KEY_IS_DARK_THEME, false)
+            return UserSettings(isDarkTheme = isDarkThemeSP)
+        }catch (e:Exception){
+            showMessage(e.toString())
+            throw e
+        }
     }
 }

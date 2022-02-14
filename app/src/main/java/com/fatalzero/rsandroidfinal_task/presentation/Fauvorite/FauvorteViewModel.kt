@@ -14,9 +14,6 @@ class FauvorteViewModel @Inject constructor(
     var jokeSendUseCase: JokeSendUseCase,var repository:JokesListRepositoryImpl
 ) : ViewModel() {
 
-    init{
-        Log.d("FauvoriteListFragment","View model create")
-    }
 
     fun sendJoke(joke: Joke?) {
         jokeSendUseCase.execute(joke)
