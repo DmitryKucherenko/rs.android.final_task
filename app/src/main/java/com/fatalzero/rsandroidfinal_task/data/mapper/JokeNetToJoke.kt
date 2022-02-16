@@ -23,7 +23,8 @@ class JokeMapper {
 
         fun jokeToJokeDbModel(joke: Joke?) = JokeDbModel(joke?.joke, joke?.id, joke?.category)
 
-        fun jokeDbModelToJoke(jokeDbModel: JokeDbModel?) = Joke(jokeDbModel?.joke, jokeDbModel?.id, jokeDbModel?.category)
+        fun jokeDbModelToJoke(jokeDbModel: JokeDbModel?) =
+            Joke(jokeDbModel?.joke, jokeDbModel?.id, jokeDbModel?.category)
 
 
     }

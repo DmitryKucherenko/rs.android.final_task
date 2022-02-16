@@ -14,18 +14,15 @@ import javax.inject.Singleton
 @Module
 interface ViewModelModule {
 
-
     @IntoMap
     @StringKey("JokesListViewModel")
     @Binds
     fun bindListViewModel(impl: JokesListViewModel): ViewModel
 
-
     @IntoMap
     @StringKey("MainActivityViewModel")
     @Binds
     fun bindMainActivityViewModel(impl: MainActivityViewModel): ViewModel
-
 
     @IntoMap
     @StringKey("FauvorteViewModel")
