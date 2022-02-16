@@ -21,7 +21,7 @@ class SettingsRepositoryImpl @Inject constructor(var context: Context) : Setting
         try {
             sharedPreferences.edit().putBoolean(KEY_IS_DARK_THEME, userSettings.isDarkTheme).apply()
             return true
-        }catch (e:Exception){
+        } catch (e: Exception) {
             showMessage(e.toString())
             throw e
         }
@@ -31,7 +31,7 @@ class SettingsRepositoryImpl @Inject constructor(var context: Context) : Setting
         try {
             val isDarkThemeSP = sharedPreferences.getBoolean(KEY_IS_DARK_THEME, false)
             return UserSettings(isDarkTheme = isDarkThemeSP)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             showMessage(e.toString())
             throw e
         }

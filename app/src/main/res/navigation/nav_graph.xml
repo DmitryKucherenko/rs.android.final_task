@@ -24,5 +24,21 @@
         android:id="@+id/bookMarksFragment"
         android:name="com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.FauvoriteListFragment"
         android:label="book_marks_fragment"
-        tools:layout="@layout/fauvorite_joke_list_fragment" />
+        tools:layout="@layout/fauvorite_joke_list_fragment" >
+        <action
+            android:id="@+id/action_bookMarksFragment_to_addFragment"
+            app:destination="@id/addFragment"
+            app:popUpTo="@id/bookMarksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.AddFragment"
+        android:label="add_fragment"
+        tools:layout="@layout/add_fragment" >
+        <argument
+            android:name="jokeId"
+            app:argType="integer"
+
+            />
+    </fragment>
 </navigation>

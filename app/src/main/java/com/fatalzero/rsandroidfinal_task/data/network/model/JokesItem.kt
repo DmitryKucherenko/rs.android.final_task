@@ -5,7 +5,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class JokesItem(
-
     @Json(name = "delivery")
     val delivery: String?,
 

@@ -7,14 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
+import com.fatalzero.rsandroidfinal_task.R
 
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeItemBinding
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
+import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.ItemClickListener
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import java.lang.Exception
@@ -24,8 +28,8 @@ class FauvoriteListFragment : Fragment() {
 
     private var _binding: FauvoriteJokeListFragmentBinding? = null
     private val binding get() = _binding!!
-    private var fauvoriteItemClickListener: ItemClickListener? = null
-
+    private var fauvoriteItemClickListener: FauvItemClickListener? = null
+    private lateinit var navController: NavController
     private var favoriteRecyclerView: RecyclerView? = null
 
     private val component by lazy {
@@ -55,15 +59,23 @@ class FauvoriteListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         favoriteRecyclerView = binding.jokeRecyclerView
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
+        navController =  findNavController()
+        binding.floatingActionButton.setOnClickListener {
+//            navController.navigate(R.id.action_bookMarksFragment_to_addFragment)
+            navController.navigate(FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(-1))
+        }
 
-
-        fauvoriteItemClickListener = object : ItemClickListener {
+        fauvoriteItemClickListener = object : FauvItemClickListener {
             override fun onItemClick(joke: Joke?) {
                 viewModel.sendJoke(joke)
             }
 
             override fun onSaveItemClick(joke: Joke?) {
                 throw Exception("NOT SUPPORTED!")
+            }
+
+            override fun onEditItemClick(id: Int) {
+                navController.navigate(FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(id))
             }
 
             override fun onDeleteItemClick(joke: Joke?) {

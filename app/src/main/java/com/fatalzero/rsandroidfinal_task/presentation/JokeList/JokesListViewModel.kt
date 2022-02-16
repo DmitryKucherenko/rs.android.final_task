@@ -20,8 +20,8 @@ class JokesListViewModel @Inject constructor(
     jokePagingSource: JokePagingSource
 ) : ViewModel() {
 
-    init{
-        Log.d("JokesListViewModel","$this")
+    init {
+        Log.d("JokesListViewModel", "$this")
     }
 
     val jokeFlowData = Pager(
@@ -36,7 +36,7 @@ class JokesListViewModel @Inject constructor(
 
     fun saveJoke(joke: Joke?) {
         viewModelScope.launch {
-            Log.d("JOKE_LIST",joke.toString())
+            Log.d("JOKE_LIST", joke.toString())
             jokeSaveUseCase(joke)
         }
     }

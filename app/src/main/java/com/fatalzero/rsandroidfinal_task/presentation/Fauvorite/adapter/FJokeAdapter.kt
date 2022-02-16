@@ -7,7 +7,8 @@ import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeItemBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.ItemClickListener
 
-class FJokeAdapter(private val itemClickListener: ItemClickListener?):ListAdapter<Joke,FJokeHolder>(DiffCallback) {
+class FJokeAdapter(private val itemClickListener: FauvItemClickListener?) :
+    ListAdapter<Joke, FJokeHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FJokeHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -20,5 +21,5 @@ class FJokeAdapter(private val itemClickListener: ItemClickListener?):ListAdapte
         holder.bind(joke)
     }
 
-    override fun getItemCount()=currentList.size
+    override fun getItemCount() = currentList.size
 }

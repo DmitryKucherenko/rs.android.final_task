@@ -1,6 +1,7 @@
 package com.fatalzero.rsandroidfinal_task.di
 
 import androidx.lifecycle.ViewModel
+import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.AddViewModel
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.FauvorteViewModel
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.JokesListViewModel
 import com.fatalzero.rsandroidfinal_task.presentation.MainActivityViewModel
@@ -31,5 +32,10 @@ interface ViewModelModule {
     @StringKey("FauvorteViewModel")
     @Binds
     fun bindFauvorteViewModel(impl: FauvorteViewModel): ViewModel
+
+    @IntoMap
+    @StringKey("AddViewModel")
+    @Binds
+    fun bindAddViewModel(impl: AddViewModel): ViewModel
 
 }
