@@ -64,23 +64,25 @@
             android:id="@+id/shareButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:contentDescription="@string/share_buton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/editButton"
+            app:layout_constraintTop_toBottomOf="@+id/jokeText"
             app:srcCompat="@android:drawable/ic_menu_share"
-            tools:ignore="ImageContrastCheck"
-            tools:layout_editor_absoluteY="85dp" />
+            tools:ignore="ImageContrastCheck" />
 
         <ImageButton
             android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toStartOf="@+id/shareButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/deleteButton"
-            app:srcCompat="@android:drawable/ic_menu_edit"
-            tools:layout_editor_absoluteY="84dp" />
+            app:layout_constraintTop_toBottomOf="@+id/jokeText"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
