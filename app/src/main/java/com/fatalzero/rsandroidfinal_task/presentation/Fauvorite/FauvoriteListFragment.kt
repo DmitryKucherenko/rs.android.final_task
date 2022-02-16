@@ -44,7 +44,7 @@ class FauvoriteListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         component.inject(this)
         _binding = FauvoriteJokeListFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -73,7 +73,7 @@ class FauvoriteListFragment : Fragment() {
 
         adapter = FJokeAdapter(fauvoriteItemClickListener)
         favoriteRecyclerView?.adapter = adapter
-        viewModel.getDBlist().observe(viewLifecycleOwner,
+        viewModel.listDbLiveData.observe(viewLifecycleOwner,
             { jokes ->
                 jokes?.let {
                     adapter?.submitList(it)
