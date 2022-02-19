@@ -12,15 +12,16 @@ import com.fatalzero.rsandroidfinal_task.utils.ThemeManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
+
 private const val NIGHT_THEME = true
 private const val DAY_THEME = false
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
-private val component by lazy{
-    (application as App).appComponent
-}
+    private val component by lazy {
+        (application as App).appComponent
+    }
 
     @Inject
     lateinit var mainViewModel: MainActivityViewModel
@@ -35,11 +36,11 @@ private val component by lazy{
         mainViewModel.loadSettings()
         lifecycleScope.launchWhenStarted {
             mainViewModel.isDarkTheme.collectLatest {
-                when(it){
-                    NIGHT_THEME ->  ThemeManager.setNightTheme()
-                    DAY_THEME->ThemeManager.setDayTheme()
+                when (it) {
+                    NIGHT_THEME -> ThemeManager.setNightTheme()
+                    DAY_THEME -> ThemeManager.setDayTheme()
                 }
-           }
+            }
         }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)

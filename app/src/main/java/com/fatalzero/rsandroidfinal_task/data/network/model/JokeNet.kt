@@ -22,7 +22,7 @@ data class JokeNet(
     val joke: String?,
 
     @Json(name = "id")
-    val id: Int?,
+    val id: String?,
 
     @Json(name = "category")
     val category: String?,

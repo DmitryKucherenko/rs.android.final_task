@@ -9,9 +9,6 @@ import com.fatalzero.rsandroidfinal_task.domain.usecase.SendJoke
 import javax.inject.Inject
 
 
-
-
-
 class SendJokeImpl @Inject constructor(val context: Context) : SendJoke {
 
     private fun getBodyMessage(

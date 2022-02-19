@@ -9,12 +9,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
-class MainActivityViewModel @Inject constructor (var getSettingsUseCase: GetSettingsUseCase, var saveSettingUseCase: SaveSettingsUseCase) :ViewModel() {
+class MainActivityViewModel @Inject constructor(
+    var getSettingsUseCase: GetSettingsUseCase,
+    var saveSettingUseCase: SaveSettingsUseCase
+) : ViewModel() {
 
 
     private val _isDarkTheme = MutableStateFlow<Boolean>(false)
     val isDarkTheme: StateFlow<Boolean> = _isDarkTheme.asStateFlow()
-
 
 
     fun saveSetting(isDarkTheme: Boolean) {
@@ -26,7 +28,6 @@ class MainActivityViewModel @Inject constructor (var getSettingsUseCase: GetSett
         val settings = getSettingsUseCase.execute()
         _isDarkTheme.value = settings.isDarkTheme
     }
-
 
 
 }

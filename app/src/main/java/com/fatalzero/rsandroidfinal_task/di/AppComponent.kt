@@ -2,6 +2,7 @@ package com.fatalzero.rsandroidfinal_task.di
 
 import android.content.Context
 import com.fatalzero.rsandroidfinal_task.data.network.ApiFactory
+import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.AddFragment
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.FauvoriteListFragment
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.JokesList
 import com.fatalzero.rsandroidfinal_task.presentation.MainActivity
@@ -15,7 +16,8 @@ interface AppComponent {
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance context: Context
+        fun create(
+            @BindsInstance context: Context
         ): AppComponent
     }
 
@@ -23,5 +25,6 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(jokesList: JokesList)
     fun inject(fauvoriteListFragment: FauvoriteListFragment)
+    fun inject(addFragment: AddFragment)
 
 }

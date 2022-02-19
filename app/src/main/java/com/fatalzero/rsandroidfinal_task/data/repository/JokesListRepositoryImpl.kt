@@ -1,6 +1,7 @@
 package com.fatalzero.rsandroidfinal_task.data.repository
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.map
@@ -37,6 +38,7 @@ class JokesListRepositoryImpl @Inject constructor(
             )
         } catch (e: Exception) {
             showMessage(e.toString())
+            Log.d("ERROR",e.toString())
             throw e
         }
 
@@ -46,6 +48,7 @@ class JokesListRepositoryImpl @Inject constructor(
         try {
             jokeDao.insertJoke(JokeMapper.jokeToJokeDbModel(joke))
         } catch (e: Exception) {
+            Log.d("ERROR",e.toString())
             showMessage(e.toString())
             throw e
         }
@@ -54,6 +57,15 @@ class JokesListRepositoryImpl @Inject constructor(
     override suspend fun deleteJoke(joke: Joke?) {
         try {
             jokeDao.deleteJoke(JokeMapper.jokeToJokeDbModel(joke))
+        } catch (e: Exception) {
+            showMessage(e.toString())
+            throw e
+        }
+    }
+
+    override suspend fun getJoke(id:String):Joke {
+        try {
+            return JokeMapper.jokeDbModelToJoke(jokeDao.getJoke(id))
         } catch (e: Exception) {
             showMessage(e.toString())
             throw e
@@ -72,6 +84,7 @@ class JokesListRepositoryImpl @Inject constructor(
             throw e
         }
     }
+
 
 
 }

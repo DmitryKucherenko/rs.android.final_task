@@ -10,14 +10,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Inject
 
 
-class ApiFactory @Inject constructor( private val context: Context) {
+class ApiFactory @Inject constructor(private val context: Context) {
 
-        init {
-            (context.applicationContext as App).appComponent.inject(this)
-        }
+    init {
+        (context.applicationContext as App).appComponent.inject(this)
+    }
 
-
-    private  val BASE_URL = "https://v2.jokeapi.dev"
+    private val BASE_URL = "https://v2.jokeapi.dev"
 
     @Inject
     lateinit var okhttp: OkHttpClient
@@ -27,7 +26,6 @@ class ApiFactory @Inject constructor( private val context: Context) {
 
     @Inject
     lateinit var JOKE_SERVICE: ApiService
-
 
 }
 

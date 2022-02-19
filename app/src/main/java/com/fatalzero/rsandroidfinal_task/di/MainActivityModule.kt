@@ -10,5 +10,5 @@ import javax.inject.Singleton
 interface MainActivityModule {
     @Singleton
     @Binds
-    fun bindsSettingRepository(settingsRepositoryImpl: SettingsRepositoryImpl):SettingsRepository
+    fun bindsSettingRepository(settingsRepositoryImpl: SettingsRepositoryImpl): SettingsRepository
 }

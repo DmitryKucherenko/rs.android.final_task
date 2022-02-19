@@ -19,11 +19,11 @@ interface JokeListModule {
 
     @Singleton
     @Binds
-    fun bindJokeListRepository(jokesListRepositoryImpl: JokesListRepositoryImpl):JokesListRepository
+    fun bindJokeListRepository(jokesListRepositoryImpl: JokesListRepositoryImpl): JokesListRepository
 
     @Singleton
     @Binds
-    fun bindJokeListUseCase (jokesListUseCase: JokesListUseCase): IJokesListUseCase
+    fun bindJokeListUseCase(jokesListUseCase: JokesListUseCase): IJokesListUseCase
 
     @Singleton
     @Binds
