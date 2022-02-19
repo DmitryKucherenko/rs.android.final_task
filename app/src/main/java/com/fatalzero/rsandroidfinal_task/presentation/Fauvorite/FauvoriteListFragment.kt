@@ -11,12 +11,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
+import com.fatalzero.rsandroidfinal_task.R
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
+import com.fatalzero.rsandroidfinal_task.utils.JokeDialog
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import java.lang.Exception
 import javax.inject.Inject
@@ -42,6 +44,8 @@ class FauvoriteListFragment : Fragment() {
         ViewModelProvider(this, viewModelFactory)[FauvorteViewModel::class.java]
     }
 
+    private val deleteDialog by lazy{JokeDialog(requireActivity(),getString(R.string.Delete_Message))}
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,13 +56,14 @@ class FauvoriteListFragment : Fragment() {
         return view
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favoriteRecyclerView = binding.jokeRecyclerView
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
         navController =  findNavController()
         binding.floatingActionButton.setOnClickListener {
-//            navController.navigate(R.id.action_bookMarksFragment_to_addFragment)
             navController.navigate(FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(UNDEFINED_ID))
         }
 
@@ -76,7 +81,7 @@ class FauvoriteListFragment : Fragment() {
             }
 
             override fun onDeleteItemClick(joke: Joke?) {
-                viewModel.deleteJoke(joke)
+                deleteDialog{viewModel.deleteJoke(joke)}
             }
         }
 
