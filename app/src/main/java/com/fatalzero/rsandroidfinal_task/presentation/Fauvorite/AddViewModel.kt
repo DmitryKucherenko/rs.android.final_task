@@ -16,7 +16,7 @@ class AddViewModel @Inject constructor(var saveUseCase: JokeSaveUseCase,var joke
     val finish:LiveData<Boolean>
     get() = _finish
 
-    private var _joke = MutableLiveData<Joke>(Joke("",null,""))
+    private var _joke = MutableLiveData<Joke>(Joke())
     val joke: LiveData<Joke>
     get()=_joke
 
@@ -27,7 +27,7 @@ class AddViewModel @Inject constructor(var saveUseCase: JokeSaveUseCase,var joke
         }
     }
 
-    fun get(id:Int){
+    fun get(id:String){
         viewModelScope.launch {
             jokeGetUseCase(id)?.let {
                 _joke.postValue(it)

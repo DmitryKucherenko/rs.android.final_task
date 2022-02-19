@@ -8,6 +8,6 @@ interface JokesListRepository {
     suspend fun getJokesList(count: Int, range: String): List<Joke>
     suspend fun saveJoke(joke: Joke?)
     suspend fun deleteJoke(joke: Joke?)
-    suspend fun getJoke(id:Int):Joke
+    suspend fun getJoke(id:String):Joke
     fun getJokesListFromDB(): LiveData<List<Joke>>
 }

@@ -63,7 +63,7 @@ class JokesListRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getJoke(id:Int):Joke {
+    override suspend fun getJoke(id:String):Joke {
         try {
             return JokeMapper.jokeDbModelToJoke(jokeDao.getJoke(id))
         } catch (e: Exception) {

@@ -2,22 +2,20 @@ package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.fatalzero.rsandroidfinal_task.App
 
 
-import com.fatalzero.rsandroidfinal_task.R
+import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.databinding.AddFragmentBinding
-import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
+import com.fatalzero.rsandroidfinal_task.utils.GenID
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import javax.inject.Inject
 
@@ -57,7 +55,7 @@ class AddFragment : Fragment() {
             if (it) navController.popBackStack()
         })
 
-        if (jokeId == Joke.UNDEFINED_ID) {
+        if (jokeId == UNDEFINED_ID) {
             launchAddMode()
         } else {
             launcEditeMode()
@@ -68,6 +66,7 @@ class AddFragment : Fragment() {
         binding.imageButton.setOnClickListener {
             viewModel.save(
                 Joke(
+                    id=GenID.generateId(),
                     category = binding.categoryEdit.text.toString(),
                     joke = binding.JokeTextMultiLine.text.toString()
                 )

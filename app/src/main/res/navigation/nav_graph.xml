@@ -37,7 +37,7 @@
         tools:layout="@layout/add_fragment" >
         <argument
             android:name="jokeId"
-            app:argType="integer"
+            app:argType="string"
 
             />
     </fragment>

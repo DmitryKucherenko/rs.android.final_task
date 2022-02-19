@@ -1,7 +1,6 @@
 package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
-import com.fatalzero.rsandroidfinal_task.R
+import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 
-import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeItemBinding
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
-import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.ItemClickListener
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import java.lang.Exception
 import javax.inject.Inject
@@ -62,7 +59,7 @@ class FauvoriteListFragment : Fragment() {
         navController =  findNavController()
         binding.floatingActionButton.setOnClickListener {
 //            navController.navigate(R.id.action_bookMarksFragment_to_addFragment)
-            navController.navigate(FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(-1))
+            navController.navigate(FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(UNDEFINED_ID))
         }
 
         fauvoriteItemClickListener = object : FauvItemClickListener {
@@ -74,7 +71,7 @@ class FauvoriteListFragment : Fragment() {
                 throw Exception("NOT SUPPORTED!")
             }
 
-            override fun onEditItemClick(id: Int) {
+            override fun onEditItemClick(id: String) {
                 navController.navigate(FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(id))
             }
 

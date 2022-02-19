@@ -16,6 +16,6 @@ interface JokeDao {
     suspend fun deleteJoke(joke: JokeDbModel)
 
     @Query("SELECT * FROM jokedbmodel WHERE id=:id")
-    suspend fun getJoke(id:Int):JokeDbModel
+    suspend fun getJoke(id:String):JokeDbModel
 
 }
