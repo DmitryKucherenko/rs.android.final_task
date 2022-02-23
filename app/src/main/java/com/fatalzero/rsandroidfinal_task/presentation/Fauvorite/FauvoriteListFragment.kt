@@ -43,8 +43,8 @@ class FauvoriteListFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[FauvorteViewModel::class.java]
     }
-
-    private val deleteDialog by lazy{JokeDialog(requireActivity(),getString(R.string.Delete_Message))}
+    @Inject
+    lateinit var deleteDialog:JokeDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,7 +81,7 @@ class FauvoriteListFragment : Fragment() {
             }
 
             override fun onDeleteItemClick(joke: Joke?) {
-                deleteDialog{viewModel.deleteJoke(joke)}
+                deleteDialog(resources.getString(R.string.Delete_Message)){viewModel.deleteJoke(joke)}
             }
         }
 
