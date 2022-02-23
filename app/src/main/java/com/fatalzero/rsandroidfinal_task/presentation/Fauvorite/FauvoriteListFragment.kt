@@ -44,7 +44,6 @@ class FauvoriteListFragment : Fragment() {
         ViewModelProvider(this, viewModelFactory)[FauvorteViewModel::class.java]
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,15 +54,17 @@ class FauvoriteListFragment : Fragment() {
         return view
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         favoriteRecyclerView = binding.jokeRecyclerView
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
-        navController =  findNavController()
+        navController = findNavController()
         binding.floatingActionButton.setOnClickListener {
-            navController.navigate(FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(UNDEFINED_ID))
+            navController.navigate(
+                FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
+                    UNDEFINED_ID
+                )
+            )
         }
 
         fauvoriteItemClickListener = object : FauvItemClickListener {
@@ -76,7 +77,11 @@ class FauvoriteListFragment : Fragment() {
             }
 
             override fun onEditItemClick(id: String) {
-                navController.navigate(FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(id))
+                navController.navigate(
+                    FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
+                        id
+                    )
+                )
             }
 
             override fun onDeleteItemClick(joke: Joke?) {

@@ -21,28 +21,24 @@ class FauvorteViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-
     var listDbLiveData = jokeFListUseCase()
-
-
-
 
     fun sendJoke(joke: Joke?) {
         jokeSendUseCase.execute(joke)
     }
 
-    fun deleteJoke(joke: Joke?){
+    fun deleteJoke(joke: Joke?) {
         viewModelScope.launch {
             joke?.let { JokeDeleteUseCase(it) }
-
         }
     }
 
-    fun showDeleteDialog(joke:Joke?){
-        deleteDialogService.showDialog(context.resources.getString(R.string.Delete_Message)){deleteJoke(joke)}
+    fun showDeleteDialog(joke: Joke?) {
+        deleteDialogService.showDialog(context.resources.getString(R.string.Delete_Message)) {
+            deleteJoke(
+                joke
+            )
+        }
     }
-
-
-
 
 }

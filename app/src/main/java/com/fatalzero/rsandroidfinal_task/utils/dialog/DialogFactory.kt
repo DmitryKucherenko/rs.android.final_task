@@ -12,5 +12,4 @@ class DialogFactory @Inject constructor(var context: Context) {
             .setPositiveButton(android.R.string.ok) { _, _ ->
             }
     }
-
 }

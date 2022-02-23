@@ -27,16 +27,15 @@ import javax.inject.Inject
 class JokesList : Fragment() {
     private var jokeRecyclerView: RecyclerView? = null
 
-    private val component by lazy{
+    private val component by lazy {
         (requireActivity().application as App).appComponent
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-
     private val viewModel by lazy {
-        ViewModelProvider(this,viewModelFactory)[JokesListViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[JokesListViewModel::class.java]
     }
 
 
@@ -45,7 +44,6 @@ class JokesList : Fragment() {
     private var sendItemClickListener: ItemClickListener? = null
     private var adapter: JokeAdapter? = null
     private var emptyView: ViewGroup? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)
@@ -96,21 +94,19 @@ class JokesList : Fragment() {
             }
         }
 
-        adapter?.addLoadStateListener {
-                loadState ->
-            when{
-                loadState.refresh is LoadState.Error->{
-                    if(adapter?.itemCount ?: 0 < 1){
+        adapter?.addLoadStateListener { loadState ->
+            when {
+                loadState.refresh is LoadState.Error -> {
+                    if (adapter?.itemCount ?: 0 < 1) {
                         jokeRecyclerView?.visibility = GONE
                         emptyView?.visibility = VISIBLE
                     }
                 }
-                loadState.refresh !=LoadState.Loading->{
+                loadState.refresh != LoadState.Loading -> {
                     jokeRecyclerView?.visibility = VISIBLE
                     emptyView?.visibility = GONE
                 }
             }
-
         }
     }
 

@@ -26,6 +26,4 @@ interface AppComponent {
     fun inject(jokesList: JokesList)
     fun inject(fauvoriteListFragment: FauvoriteListFragment)
     fun inject(addFragment: AddFragment)
-    fun inject(dialogService: JokeDialogService)
-
 }

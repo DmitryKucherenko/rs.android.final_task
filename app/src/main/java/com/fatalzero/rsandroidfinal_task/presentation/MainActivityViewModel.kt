@@ -14,10 +14,8 @@ class MainActivityViewModel @Inject constructor(
     var saveSettingUseCase: SaveSettingsUseCase
 ) : ViewModel() {
 
-
     private val _isDarkTheme = MutableStateFlow<Boolean>(false)
     val isDarkTheme: StateFlow<Boolean> = _isDarkTheme.asStateFlow()
-
 
     fun saveSetting(isDarkTheme: Boolean) {
         val param = UserSettings(isDarkTheme)

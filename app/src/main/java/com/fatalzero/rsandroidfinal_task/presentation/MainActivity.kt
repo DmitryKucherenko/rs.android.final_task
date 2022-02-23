@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var mainViewModel: MainActivityViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)
         super.onCreate(savedInstanceState)

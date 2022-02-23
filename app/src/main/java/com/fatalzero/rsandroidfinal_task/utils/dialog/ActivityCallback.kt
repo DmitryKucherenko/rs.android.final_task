@@ -17,7 +17,6 @@ class ActivityCallback : Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityStarted(p0: Activity) {
-
     }
 
     override fun onActivityResumed(p0: Activity) {

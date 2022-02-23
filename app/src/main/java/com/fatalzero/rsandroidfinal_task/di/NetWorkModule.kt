@@ -34,11 +34,8 @@ class NetWorkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient() = OkHttpClient.Builder()
-        //  .addInterceptor(HttpLoggingInterceptor().apply {
-        //   this.level = HttpLoggingInterceptor.Level.BODY
-        //})
-        .build()
+    fun provideOkHttpClient() = OkHttpClient.Builder().build()
+
 
 
 }
