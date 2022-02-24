@@ -38,7 +38,7 @@ class JokesListRepositoryImpl @Inject constructor(
             )
         } catch (e: Exception) {
             showMessage(e.toString())
-            Log.d("ERROR",e.toString())
+            Log.d("ERROR", e.toString())
             throw e
         }
 
@@ -48,7 +48,7 @@ class JokesListRepositoryImpl @Inject constructor(
         try {
             jokeDao.insertJoke(JokeMapper.jokeToJokeDbModel(joke))
         } catch (e: Exception) {
-            Log.d("ERROR",e.toString())
+            Log.d("ERROR", e.toString())
             showMessage(e.toString())
             throw e
         }
@@ -63,7 +63,7 @@ class JokesListRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getJoke(id:String):Joke {
+    override suspend fun getJoke(id: String): Joke {
         try {
             return JokeMapper.jokeDbModelToJoke(jokeDao.getJoke(id))
         } catch (e: Exception) {
@@ -83,6 +83,20 @@ class JokesListRepositoryImpl @Inject constructor(
             showMessage(e.toString())
             throw e
         }
+    }
+
+    override fun searchQuery(query: String): LiveData<List<Joke>> {
+        try {
+            return Transformations.map(jokeDao.search(query)){
+                it.map{
+                    JokeMapper.jokeDbModelToJoke(it)
+                }
+            }
+        } catch (e: Exception) {
+            showMessage(e.toString())
+            throw e
+        }
+
     }
 
 

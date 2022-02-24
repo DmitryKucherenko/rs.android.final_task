@@ -10,4 +10,5 @@ interface JokesListRepository {
     suspend fun deleteJoke(joke: Joke?)
     suspend fun getJoke(id:String):Joke
     fun getJokesListFromDB(): LiveData<List<Joke>>
+    fun searchQuery(query:String):LiveData<List<Joke>>
 }

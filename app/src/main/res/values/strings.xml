@@ -24,4 +24,5 @@
     <string name="share_buton">share buton</string>
     <string name="save_buton">save buton</string>
     <string name="Delete_Message">Do your want delete this joke?</string>
+    <string name="add_button">Add button</string>
 </resources>

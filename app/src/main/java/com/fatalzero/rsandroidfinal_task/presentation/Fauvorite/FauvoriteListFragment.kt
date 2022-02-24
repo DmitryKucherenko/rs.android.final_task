@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -30,6 +31,7 @@ class FauvoriteListFragment : Fragment() {
     private var fauvoriteItemClickListener: FauvItemClickListener? = null
     private lateinit var navController: NavController
     private var favoriteRecyclerView: RecyclerView? = null
+    private var searchEdit:EditText? = null
 
     private val component by lazy {
         (requireActivity().application as App).appComponent
@@ -56,15 +58,17 @@ class FauvoriteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        searchEdit = binding.searchText
         favoriteRecyclerView = binding.jokeRecyclerView
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
         navController = findNavController()
         binding.floatingActionButton.setOnClickListener {
-            navController.navigate(
-                FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
-                    UNDEFINED_ID
-                )
-            )
+//            navController.navigate(
+//                FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
+//                    UNDEFINED_ID
+//                )
+//            )
+            search(searchEdit?.text.toString())
         }
 
         fauvoriteItemClickListener = object : FauvItemClickListener {
@@ -97,7 +101,17 @@ class FauvoriteListFragment : Fragment() {
                     adapter?.submitList(it)
                 }
             })
+
+
     }
+
+    fun search(query:String){
+        viewModel.searchUseCase(query).observe(viewLifecycleOwner,
+            {jokes ->
+                jokes?.let {
+                    adapter?.submitList(it)
+                }
+    })}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
