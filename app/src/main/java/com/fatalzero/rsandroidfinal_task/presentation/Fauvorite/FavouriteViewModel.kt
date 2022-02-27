@@ -1,20 +1,20 @@
 package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fatalzero.rsandroidfinal_task.R
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeDeleteUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeFListUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSendUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.SearchUseCase
+import com.fatalzero.rsandroidfinal_task.utils.Constants.DIALOG_QUESTION
 import com.fatalzero.rsandroidfinal_task.utils.DialogService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FauvorteViewModel @Inject constructor(var jokeFListUseCase: JokeFListUseCase) : ViewModel() {
+class FavouriteViewModel @Inject constructor(var jokeFListUseCase: JokeFListUseCase)
+    : ViewModel() {
 
     @Inject
     lateinit var JokeDeleteUseCase: JokeDeleteUseCase
@@ -41,14 +41,14 @@ class FauvorteViewModel @Inject constructor(var jokeFListUseCase: JokeFListUseCa
     }
 
     fun showDeleteDialog(joke: Joke?) {
-        deleteDialogService.showDialog("Do your want delete this joke?") {
+        deleteDialogService.showDialog(DIALOG_QUESTION) {
             deleteJoke(
                 joke
             )
         }
     }
 
-    fun searchUseCase(query:String):LiveData<List<Joke>>{
+    fun searchJoke(query: String): LiveData<List<Joke>> {
         val searchQuery = "%$query%"
         return jokeSearchUseCase(searchQuery)
     }

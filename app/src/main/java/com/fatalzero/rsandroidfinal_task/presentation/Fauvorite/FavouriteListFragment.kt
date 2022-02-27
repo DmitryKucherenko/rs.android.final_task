@@ -12,26 +12,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
-import com.fatalzero.rsandroidfinal_task.R
-import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
-
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
-import com.fatalzero.rsandroidfinal_task.utils.DialogService
+import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
+import com.fatalzero.rsandroidfinal_task.utils.DebouncingTextWatcher
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
-import java.lang.Exception
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import javax.inject.Inject
 
-class FauvoriteListFragment : Fragment() {
+class FavouriteListFragment : Fragment() {
 
     private var _binding: FauvoriteJokeListFragmentBinding? = null
-    private val binding get() = _binding!!
-    private var fauvoriteItemClickListener: FauvItemClickListener? = null
-    private lateinit var navController: NavController
+    private val binding get() = requireNotNull(_binding)
+    private var favoriteItemClickListener: FauvItemClickListener? = null
+    private var navController: NavController? = null
     private var favoriteRecyclerView: RecyclerView? = null
-    private var searchEdit:EditText? = null
+    private var searchTextView: EditText? = null
+    private var addButton: FloatingActionButton? = null
 
     private val component by lazy {
         (requireActivity().application as App).appComponent
@@ -43,7 +42,7 @@ class FauvoriteListFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)[FauvorteViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[FavouriteViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -52,26 +51,43 @@ class FauvoriteListFragment : Fragment() {
     ): View {
         component.inject(this)
         _binding = FauvoriteJokeListFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        searchEdit = binding.searchText
-        favoriteRecyclerView = binding.jokeRecyclerView
+    private fun search(query: String) {
+        viewModel.searchJoke(query).observe(viewLifecycleOwner,
+            { jokes ->
+                jokes?.let {
+                    adapter?.submitList(it)
+                }
+            })
+    }
+
+    private fun initView() {
+        with(binding) {
+            searchTextView = searchText
+            favoriteRecyclerView = jokeRecyclerView
+            addButton = floatingActionButton
+        }
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
         navController = findNavController()
-        binding.floatingActionButton.setOnClickListener {
-//            navController.navigate(
-//                FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
-//                    UNDEFINED_ID
-//                )
-//            )
-            search(searchEdit?.text.toString())
+
+    }
+
+    private fun setupListener() {
+        addButton?.setOnClickListener {
+            navController?.navigate(
+                FavouriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
+                    UNDEFINED_ID
+                )
+            )
         }
 
-        fauvoriteItemClickListener = object : FauvItemClickListener {
+        searchTextView?.addTextChangedListener(DebouncingTextWatcher.getWatcher(
+            this@FavouriteListFragment.lifecycle,
+        ) { search(it.toString()) })
+
+        favoriteItemClickListener = object : FauvItemClickListener {
             override fun onItemClick(joke: Joke?) {
                 viewModel.sendJoke(joke)
             }
@@ -81,8 +97,8 @@ class FauvoriteListFragment : Fragment() {
             }
 
             override fun onEditItemClick(id: String) {
-                navController.navigate(
-                    FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
+                navController?.navigate(
+                    FavouriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
                         id
                     )
                 )
@@ -92,30 +108,20 @@ class FauvoriteListFragment : Fragment() {
                 viewModel.showDeleteDialog(joke)
             }
         }
-
-        adapter = FJokeAdapter(fauvoriteItemClickListener)
+        adapter = FJokeAdapter(favoriteItemClickListener)
         favoriteRecyclerView?.adapter = adapter
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        setupListener()
         viewModel.listDbLiveData.observe(viewLifecycleOwner,
             { jokes ->
                 jokes?.let {
                     adapter?.submitList(it)
                 }
             })
-
-
-    }
-
-    fun search(query:String){
-        viewModel.searchUseCase(query).observe(viewLifecycleOwner,
-            {jokes ->
-                jokes?.let {
-                    adapter?.submitList(it)
-                }
-    })}
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
 
     override fun onDestroyView() {

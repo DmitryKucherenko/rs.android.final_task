@@ -2,20 +2,17 @@ package com.fatalzero.rsandroidfinal_task.di
 
 import androidx.lifecycle.ViewModel
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.AddViewModel
-import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.FauvorteViewModel
+import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.FavouriteViewModel
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.JokesListViewModel
 import com.fatalzero.rsandroidfinal_task.presentation.MainActivityViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import dagger.multibindings.StringKey
-import javax.inject.Singleton
 
 
 @Module
 interface ViewModelModule {
-
-
     @IntoMap
     @StringKey("JokesListViewModel")
     @Binds
@@ -27,11 +24,10 @@ interface ViewModelModule {
     @Binds
     fun bindMainActivityViewModel(impl: MainActivityViewModel): ViewModel
 
-
     @IntoMap
-    @StringKey("FauvorteViewModel")
+    @StringKey("FavouriteViewModel")
     @Binds
-    fun bindFauvorteViewModel(impl: FauvorteViewModel): ViewModel
+    fun bindFauvorteViewModel(impl: FavouriteViewModel): ViewModel
 
     @IntoMap
     @StringKey("AddViewModel")

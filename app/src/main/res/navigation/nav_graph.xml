@@ -22,7 +22,7 @@
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/bookMarksFragment"
-        android:name="com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.FauvoriteListFragment"
+        android:name="com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.FavouriteListFragment"
         android:label="book_marks_fragment"
         tools:layout="@layout/fauvorite_joke_list_fragment" >
         <action
