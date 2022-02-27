@@ -1,12 +1,9 @@
 package com.fatalzero.rsandroidfinal_task.di
 
-import android.content.Context
 import com.fatalzero.rsandroidfinal_task.data.network.ApiService
-import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton

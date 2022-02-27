@@ -8,8 +8,6 @@ import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeDeleteUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeFListUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSendUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.SearchUseCase
-import com.fatalzero.rsandroidfinal_task.utils.Constants.DIALOG_QUESTION
-import com.fatalzero.rsandroidfinal_task.utils.DialogService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,8 +17,7 @@ class FavouriteViewModel @Inject constructor(var jokeFListUseCase: JokeFListUseC
     @Inject
     lateinit var JokeDeleteUseCase: JokeDeleteUseCase
 
-    @Inject
-    lateinit var deleteDialogService: DialogService
+
 
     @Inject
     lateinit var jokeSearchUseCase: SearchUseCase
@@ -40,13 +37,7 @@ class FavouriteViewModel @Inject constructor(var jokeFListUseCase: JokeFListUseC
         }
     }
 
-    fun showDeleteDialog(joke: Joke?) {
-        deleteDialogService.showDialog(DIALOG_QUESTION) {
-            deleteJoke(
-                joke
-            )
-        }
-    }
+
 
     fun searchJoke(query: String): LiveData<List<Joke>> {
         val searchQuery = "%$query%"
