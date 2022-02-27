@@ -18,7 +18,7 @@ interface JokeDao {
     @Query("SELECT * FROM jokedbmodel WHERE id=:id")
     suspend fun getJoke(id:String):JokeDbModel
 
-    @Query("SELECT * FROM jokedbmodel WHERE category like :searchQuery or joke like :searchQuery")
+    @Query("SELECT * FROM jokedbmodel WHERE category like :searchQuery or joke like :searchQuery COLLATE NOCASE")
     fun search(searchQuery:String):LiveData<List<JokeDbModel>>
 
 }

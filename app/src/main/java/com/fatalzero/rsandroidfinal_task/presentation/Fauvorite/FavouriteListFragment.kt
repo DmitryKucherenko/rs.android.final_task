@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,9 +84,9 @@ class FavouriteListFragment : Fragment() {
             )
         }
 
-        searchTextView?.addTextChangedListener(DebouncingTextWatcher.getWatcher(
-            this@FavouriteListFragment.lifecycle,
-        ) { search(it.toString()) })
+        searchTextView?.addTextChangedListener(
+            DebouncingTextWatcher.getWatcher(lifecycleScope) {search(it.toString())}
+        )
 
         favoriteItemClickListener = object : FauvItemClickListener {
             override fun onItemClick(joke: Joke?) {
