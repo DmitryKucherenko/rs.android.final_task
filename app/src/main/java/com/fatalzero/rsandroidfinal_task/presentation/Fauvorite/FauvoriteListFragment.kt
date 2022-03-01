@@ -11,16 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
-import com.fatalzero.rsandroidfinal_task.R
-import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
-
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
-import com.fatalzero.rsandroidfinal_task.utils.DialogService
+import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
-import java.lang.Exception
 import javax.inject.Inject
 
 class FauvoriteListFragment : Fragment() {
