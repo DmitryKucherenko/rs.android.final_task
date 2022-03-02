@@ -41,11 +41,15 @@ class DialogFactory @Inject constructor(var context: Context) {
             requestOverlayPermission()
             null
         } else {
-            getDialog(context.getString(R.string.Delete_Message)).setPositiveButton(android.R.string.ok) { _, _ ->
+            getDialog(context.getString(R.string.Delete_Message)).
+            setPositiveButton(android.R.string.ok) { _, _ ->
                 action()
             }.create()
                 .apply {
-                    window?.setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY)
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+                        window?.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT)
+                    } else
+                        window?.setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY)
                 }
         }
 }
