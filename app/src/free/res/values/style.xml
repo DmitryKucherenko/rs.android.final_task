@@ -1,0 +1,14 @@
+<resources>
+
+    <style name="JokeCardStyle">
+        <item name="android:background">@drawable/gradient_color</item>
+    </style>
+
+    <style name="JokeCategory">
+        <item name="android:background">@drawable/textview_roundstyle</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:background">@drawable/button_roundstyle</item>
+    </style>
+</resources>

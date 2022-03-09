@@ -11,7 +11,7 @@
         tools:layout="@layout/jokes_list_fragment">
         <action
             android:id="@+id/action_jokesList_to_settingsFragment"
-            app:destination="@id/settingsFragment"/>
+            app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/action_jokesList_to_bookMarksFragment"
             app:destination="@id/bookMarksFragment" />

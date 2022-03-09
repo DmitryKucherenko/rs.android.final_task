@@ -17,7 +17,9 @@ import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBi
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
+import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
+import com.fatalzero.rsandroidfinal_task.utils.isPaidVersion
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -37,6 +39,9 @@ class FauvoriteListFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
+    @Inject
+    lateinit var showMessage: ShowMessage
 
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[FauvorteViewModel::class.java]
@@ -58,8 +63,13 @@ class FauvoriteListFragment : Fragment() {
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
         navController =  findNavController()
         binding.floatingActionButton.setOnClickListener {
-//            navController.navigate(R.id.action_bookMarksFragment_to_addFragment)
-            navController.navigate(FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(UNDEFINED_ID))
+            if(isPaidVersion()) {
+                navController.navigate(
+                    FauvoriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
+                        UNDEFINED_ID
+                    )
+                )
+            } else showMessage("Add joke available only in paid version!")
         }
 
         fauvoriteItemClickListener = object : FauvItemClickListener {

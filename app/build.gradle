@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     buildFeatures {
-        viewBinding = true
+        viewBinding  true
     }
 
     defaultConfig {
@@ -21,6 +21,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
@@ -36,6 +37,28 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        free {
+            manifestPlaceholders = [appTheme: "@style/Theme.FreeVersion"]
+            versionName "1.0-free"
+            dimension "version"
+            buildConfigField "boolean", "PAID_VERSION", "false"
+        }
+
+        paid {
+            manifestPlaceholders = [appTheme: "@style/Theme.PaidVersion"]
+            versionName "1.0-paid"
+            dimension "version"
+            buildConfigField "boolean", "PAID_VERSION", "true"
+        }
+    }
+
+
+
+
 }
 
 dependencies {

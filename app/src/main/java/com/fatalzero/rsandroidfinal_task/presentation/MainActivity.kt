@@ -8,6 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.R
+import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.FauvoriteListFragmentDirections
+import com.fatalzero.rsandroidfinal_task.utils.Constants
 import com.fatalzero.rsandroidfinal_task.utils.ThemeManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.flow.collectLatest
@@ -45,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setupWithNavController(navController)
+
+
+
+
     }
 
 
