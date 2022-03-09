@@ -1,29 +1,22 @@
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardBackgroundColor="#ffb2ff"
+    style="@style/JokeCardStyle"
+
 
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/ItemBackground">
 
 
         <TextView
             android:id="@+id/categoryText"
+            style="@style/JokeCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="#FF9800"
-            android:padding="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.099"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,11 +41,11 @@
 
         <ImageButton
             android:id="@+id/saveButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
+            style="@style/ButtonStyle"
+            android:layout_marginBottom="5dp"
             android:contentDescription="@string/save_buton"
             android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/shareButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,17 +55,16 @@
 
         <ImageButton
             android:id="@+id/shareButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
+            style="@style/ButtonStyle"
+            android:layout_marginBottom="5dp"
             android:contentDescription="@string/share_buton"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/saveButton"
             app:layout_constraintTop_toBottomOf="@+id/jokeText"
             app:srcCompat="@android:drawable/ic_menu_share"
             tools:ignore="ImageContrastCheck" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

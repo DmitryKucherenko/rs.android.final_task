@@ -1,23 +1,15 @@
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     style="@style/JokeCardStyle"
+
 
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient_color"
-        >
-
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/ItemBackground">
 
         <TextView
             android:id="@+id/categoryText"
@@ -49,10 +41,6 @@
         <ImageButton
             android:id="@+id/deleteButton"
             style="@style/ButtonStyle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="5dp"
             android:contentDescription="@string/delete_button"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,10 +55,6 @@
         <ImageButton
             android:id="@+id/shareButton"
             style="@style/ButtonStyle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="5dp"
             android:contentDescription="@string/share_buton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,10 +67,6 @@
         <ImageButton
             android:id="@+id/editButton"
             style="@style/ButtonStyle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/shareButton"
             app:layout_constraintHorizontal_bias="0.5"
