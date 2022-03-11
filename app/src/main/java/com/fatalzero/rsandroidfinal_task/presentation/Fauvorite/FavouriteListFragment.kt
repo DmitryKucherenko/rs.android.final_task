@@ -106,7 +106,7 @@ class FavouriteListFragment : Fragment() {
             }
 
             override fun onDeleteItemClick(joke: Joke?) {
-                viewModel.deleteJoke(joke)
+                viewModel.showDeleteDialog(joke)
             }
         }
         adapter = FJokeAdapter(favoriteItemClickListener)
