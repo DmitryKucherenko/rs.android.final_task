@@ -66,7 +66,7 @@ class AddFragment : Fragment() {
         binding.imageButton.setOnClickListener {
             viewModel.save(
                 Joke(
-                    id=GenID.generateId(),
+                    id = GenID.generateId(),
                     category = binding.categoryEdit.text.toString(),
                     joke = binding.JokeTextMultiLine.text.toString()
                 )
@@ -89,11 +89,9 @@ class AddFragment : Fragment() {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }

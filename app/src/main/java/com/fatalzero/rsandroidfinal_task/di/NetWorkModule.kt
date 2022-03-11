@@ -4,7 +4,6 @@ import com.fatalzero.rsandroidfinal_task.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -32,10 +31,8 @@ class NetWorkModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient() = OkHttpClient.Builder()
-        //  .addInterceptor(HttpLoggingInterceptor().apply {
-        //   this.level = HttpLoggingInterceptor.Level.BODY
-        //})
-        .build()
+    fun provideOkHttpClient() = OkHttpClient.Builder().build()
+
+
 
 }

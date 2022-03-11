@@ -30,11 +30,6 @@ interface JokeListModule {
     fun bindSendJoke(sendJokeImpl: SendJokeImpl): SendJoke
 
 
-    @Singleton
-    fun getJokeSendUseCase(context: Context): JokeSendUseCase
-
-    @Singleton
-    fun getJokePagingSource(jokesListUseCase: IJokesListUseCase): JokePagingSource
 }
 
 

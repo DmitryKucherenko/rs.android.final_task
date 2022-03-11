@@ -44,7 +44,7 @@ class JokePagingSourceTest {
             val jokeMapper = JokeMapper()
             val jokes = mutableListOf<Joke>().apply {
                 addAll(
-                    jokeMapper.mapJsonContainerToListJoke(
+                    JokeMapper.mapJsonContainerToListJoke(
                         mutableListOf<JokeNet>().apply {
                             repeat(5) {
                                 add(JokeGenerator.getFakeJoke(it))
