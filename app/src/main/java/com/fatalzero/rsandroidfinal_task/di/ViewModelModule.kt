@@ -18,7 +18,6 @@ interface ViewModelModule {
     @Binds
     fun bindListViewModel(impl: JokesListViewModel): ViewModel
 
-
     @IntoMap
     @StringKey("MainActivityViewModel")
     @Binds

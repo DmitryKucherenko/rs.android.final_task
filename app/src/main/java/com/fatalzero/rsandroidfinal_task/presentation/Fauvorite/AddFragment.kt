@@ -14,7 +14,6 @@ import com.fatalzero.rsandroidfinal_task.App
 
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.databinding.AddFragmentBinding
-import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.utils.GenID
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import javax.inject.Inject
@@ -65,7 +64,7 @@ class AddFragment : Fragment() {
     private fun launchAddMode() {
         binding.imageButton.setOnClickListener {
             viewModel.save(
-                Joke(
+                com.fatalzero.rsandroidfinal_task.domain.model.Joke(
                     id = GenID.generateId(),
                     category = binding.categoryEdit.text.toString(),
                     joke = binding.JokeTextMultiLine.text.toString()

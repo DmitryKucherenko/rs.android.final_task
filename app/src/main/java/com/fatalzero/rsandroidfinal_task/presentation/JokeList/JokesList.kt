@@ -38,7 +38,6 @@ class JokesList : Fragment() {
         ViewModelProvider(this, viewModelFactory)[JokesListViewModel::class.java]
     }
 
-
     private var _binding: JokesListFragmentBinding? = null
     private val binding get() = _binding!!
     private var sendItemClickListener: ItemClickListener? = null

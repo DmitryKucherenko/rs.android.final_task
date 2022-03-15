@@ -20,15 +20,10 @@ class JokesListViewModel @Inject constructor(
     jokePagingSource: JokePagingSource
 ) : ViewModel() {
 
-    init {
-        Log.d("JokesListViewModel", "$this")
-    }
-
     val jokeFlowData = Pager(
         config = PagingConfig(pageSize = 1, enablePlaceholders = false),
         pagingSourceFactory = { jokePagingSource }
     ).flow.cachedIn(viewModelScope)
-
 
     fun sendJoke(joke: Joke?) {
         jokeSendUseCase.execute(joke)

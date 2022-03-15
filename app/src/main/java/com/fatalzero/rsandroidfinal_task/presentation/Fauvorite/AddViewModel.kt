@@ -11,19 +11,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddViewModel @Inject constructor(
-    var saveUseCase: JokeSaveUseCase,
-    var jokeGetUseCase: JokeGetUseCase
+    var saveUseCase: com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSaveUseCase,
+    var jokeGetUseCase: com.fatalzero.rsandroidfinal_task.domain.usecase.JokeGetUseCase
 ) : ViewModel() {
 
     private var _finish = MutableLiveData<Boolean>(false)
     val finish: LiveData<Boolean>
         get() = _finish
 
-    private var _joke = MutableLiveData<Joke>(Joke())
-    val joke: LiveData<Joke>
+    private var _joke = MutableLiveData<com.fatalzero.rsandroidfinal_task.domain.model.Joke>(com.fatalzero.rsandroidfinal_task.domain.model.Joke())
+    val joke: LiveData<com.fatalzero.rsandroidfinal_task.domain.model.Joke>
         get() = _joke
 
-    fun save(joke: Joke?) {
+    fun save(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
         viewModelScope.launch {
             saveUseCase(joke)
             _finish.postValue(true)

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
-import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
@@ -89,11 +88,11 @@ class FavouriteListFragment : Fragment() {
         )
 
         favoriteItemClickListener = object : FauvItemClickListener {
-            override fun onItemClick(joke: Joke?) {
+            override fun onItemClick(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
                 viewModel.sendJoke(joke)
             }
 
-            override fun onSaveItemClick(joke: Joke?) {
+            override fun onSaveItemClick(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
                 throw Exception("NOT SUPPORTED!")
             }
 
@@ -105,7 +104,7 @@ class FavouriteListFragment : Fragment() {
                 )
             }
 
-            override fun onDeleteItemClick(joke: Joke?) {
+            override fun onDeleteItemClick(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
                 viewModel.showDeleteDialog(joke)
             }
         }

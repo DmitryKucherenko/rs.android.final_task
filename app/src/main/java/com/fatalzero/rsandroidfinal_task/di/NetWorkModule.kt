@@ -33,6 +33,4 @@ class NetWorkModule {
     @Provides
     fun provideOkHttpClient() = OkHttpClient.Builder().build()
 
-
-
 }
