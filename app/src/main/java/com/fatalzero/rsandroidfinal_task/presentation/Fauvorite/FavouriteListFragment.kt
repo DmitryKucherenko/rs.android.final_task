@@ -84,7 +84,7 @@ class FavouriteListFragment : Fragment() {
         }
 
         searchTextView?.addTextChangedListener(
-            DebouncingTextWatcher.getWatcher(lifecycleScope) {search(it.toString())}
+            DebouncingTextWatcher.getWatcher(lifecycleScope) { search(it.toString()) }
         )
 
         favoriteItemClickListener = object : FauvItemClickListener {

@@ -14,6 +14,7 @@ import com.fatalzero.rsandroidfinal_task.data.network.ApiService
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.repository.JokesListRepository
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
+import com.fatalzero.rsandroidfinal_task.utils.ShowMessage_Factory
 
 import java.io.IOException
 import javax.inject.Inject
@@ -23,8 +24,9 @@ class JokesListRepositoryImpl @Inject constructor(
     context: Context
 ) :
     JokesListRepository {
-    @Inject
-    lateinit var showMessage: ShowMessage
+
+
+   var showMessage: ShowMessage = ShowMessage_Factory.newInstance(context)
 
     private var jokeDao = AppDatabase.getInstance(context).jokeDao()
 

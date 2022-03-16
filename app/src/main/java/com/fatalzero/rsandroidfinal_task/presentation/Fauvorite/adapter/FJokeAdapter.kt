@@ -8,7 +8,7 @@ import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.ItemClickListener
 
 class FJokeAdapter(private val itemClickListener: FauvItemClickListener?) :
-    ListAdapter<com.fatalzero.rsandroidfinal_task.domain.model.Joke, FJokeHolder>(DiffCallback) {
+    ListAdapter<Joke, FJokeHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FJokeHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

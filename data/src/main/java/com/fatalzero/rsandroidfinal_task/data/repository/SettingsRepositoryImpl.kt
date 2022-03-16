@@ -7,7 +7,6 @@ import com.fatalzero.rsandroidfinal_task.domain.repository.SettingsRepository
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
 
 import java.lang.Exception
-import java.security.spec.ECField
 import javax.inject.Inject
 
 private const val KEY_IS_DARK_THEME = "switch"

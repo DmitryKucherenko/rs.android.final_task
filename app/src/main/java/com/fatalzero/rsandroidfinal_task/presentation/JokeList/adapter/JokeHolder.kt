@@ -15,7 +15,7 @@ class JokeHolder(
     private val category = binding.categoryText
     private val share = binding.shareButton
     private val save = binding.saveButton
-    fun bind(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
+    fun bind(joke: Joke?) {
         jokeText.text = joke?.joke
         category.text = "Category: ${joke?.category}"
         share.setOnClickListener {
