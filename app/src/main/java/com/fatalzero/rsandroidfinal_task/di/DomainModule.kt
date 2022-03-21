@@ -3,21 +3,19 @@ package com.fatalzero.rsandroidfinal_task.di
 import com.fatalzero.rsandroidfinal_task.domain.repository.JokesListRepository
 import com.fatalzero.rsandroidfinal_task.domain.repository.SettingsRepository
 import com.fatalzero.rsandroidfinal_task.domain.usecase.*
-import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 
 @Module
 class DomainModule {
 
     @Provides
-    fun provideSearchUseCase(jokeListRepository: JokesListRepository):SearchUseCase{
+    fun provideSearchUseCase(jokeListRepository: JokesListRepository): SearchUseCase {
         return SearchUseCase(jokeListRepository)
     }
     @Provides
-    fun provideSaveSettingsUseCase(settingsRepository: SettingsRepository):SaveSettingsUseCase{
+    fun provideSaveSettingsUseCase(settingsRepository: SettingsRepository): SaveSettingsUseCase {
         return SaveSettingsUseCase(settingsRepository)
     }
 

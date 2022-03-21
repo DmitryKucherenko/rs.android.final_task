@@ -12,19 +12,15 @@ import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FavouriteViewModel (var jokeFListUseCase: JokeFListUseCase) : ViewModel() {
+class FavouriteViewModel (
+    var jokeFListUseCase: JokeFListUseCase,
+    var JokeDeleteUseCase: JokeDeleteUseCase,
+    var jokeSearchUseCase: SearchUseCase,
+    var jokeSendUseCase: JokeSendUseCase,
+    var dialogService: DialogService
+) : ViewModel() {
 
-    @Inject
-    lateinit var JokeDeleteUseCase: JokeDeleteUseCase
 
-    @Inject
-    lateinit var jokeSearchUseCase: SearchUseCase
-
-    @Inject
-    lateinit var jokeSendUseCase: JokeSendUseCase
-
-    @Inject
-    lateinit var dialogService: DialogService
 
     var listDbLiveData = jokeFListUseCase()
 

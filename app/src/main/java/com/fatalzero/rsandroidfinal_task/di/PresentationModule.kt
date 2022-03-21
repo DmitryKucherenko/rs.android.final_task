@@ -2,8 +2,7 @@ package com.fatalzero.rsandroidfinal_task.di
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.paging.PagingSource
-import com.fatalzero.rsandroidfinal_task.domain.model.Joke
+import androidx.lifecycle.ViewModelProvider
 import com.fatalzero.rsandroidfinal_task.domain.usecase.*
 import com.fatalzero.rsandroidfinal_task.domain.utils.SendJokeImpl
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.AddViewModel
@@ -12,8 +11,11 @@ import com.fatalzero.rsandroidfinal_task.presentation.JokeList.JokesListViewMode
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokePagingSource
 import com.fatalzero.rsandroidfinal_task.presentation.MainActivityViewModel
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
+import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
+import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import dagger.Module
 import dagger.Provides
+
 
 @Module
 class PresentationModule {
@@ -35,31 +37,48 @@ class PresentationModule {
     }
 
     @Provides
-    fun provideFavouriteViewModel(jokeFListUseCase: JokeFListUseCase): FavouriteViewModel {
-        return FavouriteViewModel(jokeFListUseCase)
-    }
-
-    @Provides
-    fun provideJokePagingSource(jokesListUseCase: IJokesListUseCase): JokePagingSource {
-        return JokePagingSource(jokesListUseCase)
-    }
-
-    @Provides
-    fun provideJokesListViewModel(
+    fun provideFavouriteViewModel(
+        jokeFListUseCase: JokeFListUseCase,
+        jokeDeleteUseCase: JokeDeleteUseCase,
+        jokeSearchUseCase: SearchUseCase,
         jokeSendUseCase: JokeSendUseCase,
-        jokeSaveUseCase: JokeSaveUseCase,
-        jokePagingSource: JokePagingSource
-    ): JokesListViewModel {
-        return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource)
+        dialogService: DialogService
+    ): FavouriteViewModel {
+        return FavouriteViewModel(
+            jokeFListUseCase,
+            jokeDeleteUseCase,
+            jokeSearchUseCase,
+            jokeSendUseCase,
+            dialogService
+        )
     }
 
-    @Provides
-    fun provideSendJokeImpl (context: Context) : SendJokeImpl {
-        return SendJokeImpl(context)
-    }
 
-    @Provides
-    fun provideShowMessage ( context: Context): ShowMessage {
-        return ShowMessage(context)
-    }
+        @Provides
+        fun provideJokePagingSource(jokesListUseCase: IJokesListUseCase): JokePagingSource {
+            return JokePagingSource(jokesListUseCase)
+        }
+
+        @Provides
+        fun provideJokesListViewModel(
+            jokeSendUseCase: JokeSendUseCase,
+            jokeSaveUseCase: JokeSaveUseCase,
+            jokePagingSource: JokePagingSource
+        ): JokesListViewModel {
+            return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource)
+        }
+
+        @Provides
+        fun provideSendJokeImpl(context: Context): SendJokeImpl {
+            return SendJokeImpl(context)
+        }
+
+        @Provides
+        fun provideShowMessage(context: Context): ShowMessage {
+            return ShowMessage(context)
+        }
+
+
+
+
 }
