@@ -1,4 +1,4 @@
-package com.fatalzero.rsandroidfinal_task.utils
+package com.fatalzero.rsandroidfinal_task
 
 import androidx.appcompat.app.AppCompatDelegate
 

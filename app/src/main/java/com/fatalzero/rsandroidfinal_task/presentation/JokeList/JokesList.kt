@@ -19,7 +19,7 @@ import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.ItemClickListener
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.LoaderStateAdapter
-import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
+import com.fatalzero.rsandroidfinal_task.presentation.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import java.lang.Exception
 import javax.inject.Inject

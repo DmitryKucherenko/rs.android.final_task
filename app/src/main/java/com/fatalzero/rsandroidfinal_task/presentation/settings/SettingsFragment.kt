@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.fatalzero.rsandroidfinal_task.R
-import com.fatalzero.rsandroidfinal_task.utils.ThemeManager
+import com.fatalzero.rsandroidfinal_task.ThemeManager
 
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -13,7 +13,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings, rootKey)
         val themePreference = findPreference<SwitchPreference>("switch")
         themePreference?.setOnPreferenceChangeListener { _, _ ->
-            ThemeManager.reverseTheme()
+            com.fatalzero.rsandroidfinal_task.ThemeManager.reverseTheme()
             true
         }
     }

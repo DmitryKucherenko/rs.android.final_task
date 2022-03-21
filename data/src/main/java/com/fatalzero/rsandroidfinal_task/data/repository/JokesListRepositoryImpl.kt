@@ -4,29 +4,21 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.map
-import androidx.room.Room
 import com.fatalzero.rsandroidfinal_task.data.database.AppDatabase
-import com.fatalzero.rsandroidfinal_task.data.database.JokeDao
-import com.fatalzero.rsandroidfinal_task.data.database.JokeDbModel
 import com.fatalzero.rsandroidfinal_task.data.mapper.JokeMapper
 import com.fatalzero.rsandroidfinal_task.data.network.ApiService
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.repository.JokesListRepository
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
-import com.fatalzero.rsandroidfinal_task.utils.ShowMessage_Factory
 
-import java.io.IOException
-import javax.inject.Inject
-
-class JokesListRepositoryImpl @Inject constructor(
-    var jokesApiService: ApiService,
-    context: Context
+class JokesListRepositoryImpl (
+    private var jokesApiService: ApiService,
+     context: Context, private var showMessage:ShowMessage
 ) :
     JokesListRepository {
 
 
-   var showMessage: ShowMessage = ShowMessage_Factory.newInstance(context)
+
 
     private var jokeDao = AppDatabase.getInstance(context).jokeDao()
 

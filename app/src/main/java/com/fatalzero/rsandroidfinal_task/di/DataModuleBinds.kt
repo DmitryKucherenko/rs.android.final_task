@@ -1,7 +1,9 @@
 package com.fatalzero.rsandroidfinal_task.di
 
 import com.fatalzero.rsandroidfinal_task.data.repository.JokesListRepositoryImpl
+import com.fatalzero.rsandroidfinal_task.data.repository.SettingsRepositoryImpl
 import com.fatalzero.rsandroidfinal_task.domain.repository.JokesListRepository
+import com.fatalzero.rsandroidfinal_task.domain.repository.SettingsRepository
 import com.fatalzero.rsandroidfinal_task.domain.usecase.IJokesListUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokesListUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.SendJoke
@@ -13,7 +15,7 @@ import dagger.Module
 import javax.inject.Singleton
 
 @Module
-interface JokeListModule {
+interface DataModuleBinds {
 
     @Singleton
     @Binds
@@ -27,6 +29,11 @@ interface JokeListModule {
     @Singleton
     @Binds
     fun bindSendJoke(sendJokeImpl: SendJokeImpl): SendJoke
+
+
+    @Singleton
+    @Binds
+    fun bindsSettingRepository(settingsRepositoryImpl: SettingsRepositoryImpl): SettingsRepository
 
 
 }

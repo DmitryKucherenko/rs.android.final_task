@@ -1,6 +1,11 @@
 package com.fatalzero.rsandroidfinal_task.di
 
+import android.content.Context
 import com.fatalzero.rsandroidfinal_task.data.network.ApiService
+import com.fatalzero.rsandroidfinal_task.data.repository.JokesListRepositoryImpl
+import com.fatalzero.rsandroidfinal_task.data.repository.SettingsRepositoryImpl
+import com.fatalzero.rsandroidfinal_task.domain.repository.SettingsRepository
+import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -8,9 +13,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
-
 @Module
-class NetWorkModule {
+class DataModule {
     private val BASE_URL = "https://v2.jokeapi.dev"
 
     @Singleton
@@ -32,5 +36,16 @@ class NetWorkModule {
     @Singleton
     @Provides
     fun provideOkHttpClient() = OkHttpClient.Builder().build()
+
+    @Singleton
+    @Provides
+    fun provideSettingsRepository(context:Context,showMessage: ShowMessage):SettingsRepositoryImpl{
+        return SettingsRepositoryImpl(context,showMessage)
+    }
+    @Provides
+    fun provideJokesListRepositoryImpl(jokesApiService:ApiService,context:Context,message:ShowMessage):JokesListRepositoryImpl{
+        return JokesListRepositoryImpl(jokesApiService,context,message)
+    }
+
 
 }

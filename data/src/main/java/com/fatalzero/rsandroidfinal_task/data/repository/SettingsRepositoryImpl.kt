@@ -11,9 +11,8 @@ import javax.inject.Inject
 
 private const val KEY_IS_DARK_THEME = "switch"
 
-class SettingsRepositoryImpl @Inject constructor(var context: Context) : SettingsRepository {
-    @Inject
-    lateinit var showMessage: ShowMessage
+class SettingsRepositoryImpl (private var context: Context,private var showMessage: ShowMessage) : SettingsRepository {
+
 
     private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 

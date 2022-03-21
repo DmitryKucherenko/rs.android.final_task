@@ -1,4 +1,4 @@
-package com.fatalzero.rsandroid_task.data
+package com.example.thememanager
 
 import org.junit.Test
 

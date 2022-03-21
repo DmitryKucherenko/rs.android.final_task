@@ -12,7 +12,7 @@ import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FavouriteViewModel @Inject constructor(var jokeFListUseCase: JokeFListUseCase) : ViewModel() {
+class FavouriteViewModel (var jokeFListUseCase: JokeFListUseCase) : ViewModel() {
 
     @Inject
     lateinit var JokeDeleteUseCase: JokeDeleteUseCase

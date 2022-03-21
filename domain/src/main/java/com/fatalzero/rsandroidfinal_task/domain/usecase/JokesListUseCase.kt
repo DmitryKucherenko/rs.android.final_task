@@ -8,7 +8,7 @@ interface IJokesListUseCase {
     suspend fun execute(count: Int, range: String): List<Joke>
 }
 
-class JokesListUseCase @Inject constructor(var repository: JokesListRepository) :
+class JokesListUseCase (var repository: JokesListRepository) :
     IJokesListUseCase {
     override suspend fun execute(count: Int, range: String): List<Joke> {
         return repository.getJokesList(count, range)

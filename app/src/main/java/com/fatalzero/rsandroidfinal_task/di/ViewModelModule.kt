@@ -32,5 +32,4 @@ interface ViewModelModule {
     @StringKey("AddViewModel")
     @Binds
     fun bindAddViewModel(impl: AddViewModel): ViewModel
-
 }

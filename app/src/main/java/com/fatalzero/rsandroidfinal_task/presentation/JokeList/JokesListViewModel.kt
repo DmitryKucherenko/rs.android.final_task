@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class JokesListViewModel @Inject constructor(
+class JokesListViewModel (
     var jokeSendUseCase: JokeSendUseCase,
     var jokeSaveUseCase: JokeSaveUseCase,
     jokePagingSource: JokePagingSource
