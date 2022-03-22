@@ -5,7 +5,7 @@ import com.fatalzero.rsandroidfinal_task.domain.repository.JokesListRepository;
 
 import javax.inject.Inject;
 
-class JokeDeleteUseCase (var repository: JokesListRepository) {
+class JokeDeleteUseCase @Inject constructor(var repository: JokesListRepository) {
     suspend operator fun invoke(joke: Joke) {
         repository.deleteJoke(joke)
     }

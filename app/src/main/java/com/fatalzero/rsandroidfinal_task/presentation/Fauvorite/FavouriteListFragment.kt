@@ -18,7 +18,7 @@ import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAda
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.utils.DebouncingTextWatcher
-import com.fatalzero.rsandroidfinal_task.presentation.ViewModelFactory
+import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import javax.inject.Inject
 

@@ -5,7 +5,7 @@ import com.fatalzero.rsandroidfinal_task.domain.repository.JokesListRepository
 import javax.inject.Inject
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 
-class JokeFListUseCase (var repository: JokesListRepository) {
+class JokeFListUseCase @Inject constructor(var repository: JokesListRepository) {
      operator fun invoke(): LiveData<List<Joke>> {
         return repository.getJokesListFromDB()
     }

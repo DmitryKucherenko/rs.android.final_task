@@ -9,7 +9,7 @@ interface SendJoke {
 }
 
 
-class JokeSendUseCase(var sendJokeService: SendJoke) {
+class JokeSendUseCase @Inject constructor(var sendJokeService: SendJoke) {
     fun execute(joke: Joke?) {
         sendJokeService.sendJoke(joke)
     }

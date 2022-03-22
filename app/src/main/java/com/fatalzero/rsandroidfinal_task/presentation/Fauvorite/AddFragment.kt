@@ -15,7 +15,7 @@ import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.databinding.AddFragmentBinding
 import com.fatalzero.rsandroidfinal_task.utils.GenID
-import com.fatalzero.rsandroidfinal_task.presentation.ViewModelFactory
+import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import javax.inject.Inject
 
 class AddFragment : Fragment() {

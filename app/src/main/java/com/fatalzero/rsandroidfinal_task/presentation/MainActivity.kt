@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.R
-import com.fatalzero.rsandroidfinal_task.ThemeManager
+import com.fatalzero.rsandroidfinal_task.utils.ThemeManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
