@@ -2,7 +2,7 @@ package com.fatalzero.rsandroidfinal_task.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import javax.inject.Inject
+
 
 
 class ViewModelFactory (

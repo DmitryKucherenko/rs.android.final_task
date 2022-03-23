@@ -2,13 +2,11 @@ package com.fatalzero.rsandroidfinal_task.di
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogFactory
 import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import dagger.Module
 import dagger.Provides
-import javax.inject.Inject
 
 @Module
 class UtilsModule {
