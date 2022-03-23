@@ -1,7 +1,6 @@
 package com.fatalzero.rsandroidfinal_task.domain.usecase
 
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
-import javax.inject.Inject
 
 
 interface SendJoke {
@@ -9,7 +8,7 @@ interface SendJoke {
 }
 
 
-class JokeSendUseCase @Inject constructor(var sendJokeService: SendJoke) {
+class JokeSendUseCase (private var sendJokeService: SendJoke) {
     fun execute(joke: Joke?) {
         sendJokeService.sendJoke(joke)
     }

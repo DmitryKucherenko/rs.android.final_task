@@ -11,9 +11,9 @@ import android.provider.Settings
 import android.view.WindowManager
 import androidx.core.content.ContextCompat.startActivity
 import com.fatalzero.rsandroidfinal_task.utils.R
-import javax.inject.Inject
 
-class DialogFactory @Inject constructor(var context: Context) {
+
+class DialogFactory(private var context: Context) {
 
     private val isCanDrawOverLays: Boolean
         get() = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) true else
@@ -42,12 +42,11 @@ class DialogFactory @Inject constructor(var context: Context) {
             requestOverlayPermission()
             null
         } else {
-            getDialog(context.getString(R.string.Delete_Message)).
-            setPositiveButton(android.R.string.ok) { _, _ ->
+            getDialog(context.getString(R.string.Delete_Message)).setPositiveButton(android.R.string.ok) { _, _ ->
                 action()
             }.create()
                 .apply {
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                         window?.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT)
                     } else
                         window?.setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY)

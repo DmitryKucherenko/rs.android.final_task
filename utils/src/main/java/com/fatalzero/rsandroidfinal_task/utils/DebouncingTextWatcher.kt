@@ -3,9 +3,7 @@ package com.fatalzero.rsandroidfinal_task.utils
 
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.coroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

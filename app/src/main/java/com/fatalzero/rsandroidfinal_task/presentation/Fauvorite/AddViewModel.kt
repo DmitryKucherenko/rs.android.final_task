@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddViewModel(
-    var saveUseCase: JokeSaveUseCase,
-    var jokeGetUseCase: JokeGetUseCase
+    private var saveUseCase: JokeSaveUseCase,
+    private var jokeGetUseCase: JokeGetUseCase
 ) : ViewModel() {
 
     private var _finish = MutableLiveData<Boolean>(false)

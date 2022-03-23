@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 
 
-class ViewModelFactory @Inject constructor(
+class ViewModelFactory (
     private val viewModels: @JvmSuppressWildcards Map<String, ViewModel>
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

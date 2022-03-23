@@ -38,12 +38,20 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideSettingsRepository(context:Context,showMessage: ShowMessage): SettingsRepositoryImpl {
-        return SettingsRepositoryImpl(context,showMessage)
+    fun provideSettingsRepository(
+        context: Context,
+        showMessage: ShowMessage
+    ): SettingsRepositoryImpl {
+        return SettingsRepositoryImpl(context, showMessage)
     }
+
     @Provides
-    fun provideJokesListRepositoryImpl(jokesApiService:ApiService,context:Context,message:ShowMessage): JokesListRepositoryImpl {
-        return JokesListRepositoryImpl(jokesApiService,context,message)
+    fun provideJokesListRepositoryImpl(
+        jokesApiService: ApiService,
+        context: Context,
+        message: ShowMessage
+    ): JokesListRepositoryImpl {
+        return JokesListRepositoryImpl(jokesApiService, context, message)
     }
 
 

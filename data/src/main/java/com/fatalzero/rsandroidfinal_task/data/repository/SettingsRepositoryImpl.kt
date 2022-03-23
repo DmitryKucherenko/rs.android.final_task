@@ -5,13 +5,15 @@ import androidx.preference.PreferenceManager
 import com.fatalzero.rsandroidfinal_task.domain.model.UserSettings
 import com.fatalzero.rsandroidfinal_task.domain.repository.SettingsRepository
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
-
 import java.lang.Exception
-import javax.inject.Inject
+
 
 private const val KEY_IS_DARK_THEME = "switch"
 
-class SettingsRepositoryImpl (var context: Context,var showMessage: ShowMessage) : SettingsRepository {
+class SettingsRepositoryImpl(
+    private var context: Context,
+    private var showMessage: ShowMessage
+) : SettingsRepository {
 
 
     private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }

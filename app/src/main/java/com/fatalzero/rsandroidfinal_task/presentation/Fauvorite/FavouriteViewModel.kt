@@ -13,14 +13,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FavouriteViewModel (
-    var jokeFListUseCase: JokeFListUseCase,
-    var JokeDeleteUseCase: JokeDeleteUseCase,
-    var jokeSearchUseCase: SearchUseCase,
-    var jokeSendUseCase: JokeSendUseCase,
-    var dialogService: DialogService
+    private var jokeFListUseCase: JokeFListUseCase,
+    private var JokeDeleteUseCase: JokeDeleteUseCase,
+    private var jokeSearchUseCase: SearchUseCase,
+    private var jokeSendUseCase: JokeSendUseCase,
+    private var dialogService: DialogService
 ) : ViewModel() {
-
-
 
     var listDbLiveData = jokeFListUseCase()
 

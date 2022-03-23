@@ -23,7 +23,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import javax.inject.Inject
 
 class FavouriteListFragment : Fragment() {
-
     private var _binding: FauvoriteJokeListFragmentBinding? = null
     private val binding get() = requireNotNull(_binding)
     private var favoriteItemClickListener: FauvItemClickListener? = null

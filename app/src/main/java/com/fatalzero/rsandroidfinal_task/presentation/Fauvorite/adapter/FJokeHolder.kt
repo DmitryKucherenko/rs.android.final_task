@@ -1,10 +1,8 @@
 package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter
 
-import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeItemBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
-import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.ItemClickListener
 
 class FJokeHolder(
     private val itemClickListener: FauvItemClickListener?,

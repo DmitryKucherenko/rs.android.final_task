@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 
 class JokesListViewModel (
-    var jokeSendUseCase: JokeSendUseCase,
-    var jokeSaveUseCase: JokeSaveUseCase,
+    private var jokeSendUseCase: JokeSendUseCase,
+    private var jokeSaveUseCase: JokeSaveUseCase,
     jokePagingSource: JokePagingSource
 ) : ViewModel() {
 
