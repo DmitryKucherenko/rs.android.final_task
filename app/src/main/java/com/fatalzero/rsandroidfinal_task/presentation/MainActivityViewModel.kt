@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
-class MainActivityViewModel @Inject constructor(
-    var getSettingsUseCase: GetSettingsUseCase,
-    var saveSettingUseCase: SaveSettingsUseCase
+class MainActivityViewModel(
+    private var getSettingsUseCase: GetSettingsUseCase,
+    private var saveSettingUseCase: SaveSettingsUseCase
 ) : ViewModel() {
 
     private val _isDarkTheme = MutableStateFlow<Boolean>(false)

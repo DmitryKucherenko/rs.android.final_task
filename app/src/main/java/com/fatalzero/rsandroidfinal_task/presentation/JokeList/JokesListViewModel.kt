@@ -14,21 +14,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class JokesListViewModel @Inject constructor(
-    var jokeSendUseCase: JokeSendUseCase,
-    var jokeSaveUseCase: JokeSaveUseCase,
+class JokesListViewModel (
+    private var jokeSendUseCase: JokeSendUseCase,
+    private var jokeSaveUseCase: JokeSaveUseCase,
     jokePagingSource: JokePagingSource
 ) : ViewModel() {
-
-    init {
-        Log.d("JokesListViewModel", "$this")
-    }
 
     val jokeFlowData = Pager(
         config = PagingConfig(pageSize = 1, enablePlaceholders = false),
         pagingSourceFactory = { jokePagingSource }
     ).flow.cachedIn(viewModelScope)
-
 
     fun sendJoke(joke: Joke?) {
         jokeSendUseCase.execute(joke)

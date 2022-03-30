@@ -10,16 +10,16 @@ import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSaveUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddViewModel @Inject constructor(
-    var saveUseCase: JokeSaveUseCase,
-    var jokeGetUseCase: JokeGetUseCase
+class AddViewModel(
+    private var saveUseCase: JokeSaveUseCase,
+    private var jokeGetUseCase: JokeGetUseCase
 ) : ViewModel() {
 
     private var _finish = MutableLiveData<Boolean>(false)
     val finish: LiveData<Boolean>
         get() = _finish
 
-    private var _joke = MutableLiveData<Joke>(Joke())
+    private var _joke = MutableLiveData(Joke())
     val joke: LiveData<Joke>
         get() = _joke
 

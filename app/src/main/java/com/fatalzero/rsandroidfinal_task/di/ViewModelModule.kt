@@ -18,7 +18,6 @@ interface ViewModelModule {
     @Binds
     fun bindListViewModel(impl: JokesListViewModel): ViewModel
 
-
     @IntoMap
     @StringKey("MainActivityViewModel")
     @Binds
@@ -33,5 +32,4 @@ interface ViewModelModule {
     @StringKey("AddViewModel")
     @Binds
     fun bindAddViewModel(impl: AddViewModel): ViewModel
-
 }

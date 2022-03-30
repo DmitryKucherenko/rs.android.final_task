@@ -12,20 +12,13 @@ import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FavouriteViewModel @Inject constructor(var jokeFListUseCase: JokeFListUseCase)
-    : ViewModel() {
-
-    @Inject
-    lateinit var JokeDeleteUseCase: JokeDeleteUseCase
-
-    @Inject
-    lateinit var jokeSearchUseCase: SearchUseCase
-
-    @Inject
-    lateinit var jokeSendUseCase: JokeSendUseCase
-
-    @Inject
-    lateinit var dialogService:DialogService
+class FavouriteViewModel (
+    private var jokeFListUseCase: JokeFListUseCase,
+    private var JokeDeleteUseCase: JokeDeleteUseCase,
+    private var jokeSearchUseCase: SearchUseCase,
+    private var jokeSendUseCase: JokeSendUseCase,
+    private var dialogService: DialogService
+) : ViewModel() {
 
     var listDbLiveData = jokeFListUseCase()
 
@@ -44,8 +37,6 @@ class FavouriteViewModel @Inject constructor(var jokeFListUseCase: JokeFListUseC
             deleteJoke(joke)
         }
     }
-
-
 
     fun searchJoke(query: String): LiveData<List<Joke>> {
         val searchQuery = "%$query%"

@@ -5,7 +5,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.databinding.ItemJokeLoaderBinding
 
-class LoaderViewHolder(binding: ItemJokeLoaderBinding, var retry: () -> Unit) :
+class LoaderViewHolder(binding: ItemJokeLoaderBinding, private var retry: () -> Unit) :
     RecyclerView.ViewHolder(binding.root) {
 
     private val motionLayout: MotionLayout = binding.mlLoader

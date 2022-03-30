@@ -28,7 +28,7 @@ class JokePagingSourceTest {
     val testCoroutineRule = TestCoroutineRule()
 
     @Mock
-    lateinit var jokesListUseCase: IJokesListUseCase
+    lateinit var jokesListUseCase: com.fatalzero.rsandroidfinal_task.domain.usecase.IJokesListUseCase
 
     private lateinit var jokePagingSource: JokePagingSource
 
@@ -42,7 +42,7 @@ class JokePagingSourceTest {
     fun `reviews paging source load`() {
         testCoroutineRule.runBlockingTest {
             val jokeMapper = JokeMapper()
-            val jokes = mutableListOf<Joke>().apply {
+            val jokes = mutableListOf<com.fatalzero.rsandroidfinal_task.domain.model.Joke>().apply {
                 addAll(
                     JokeMapper.mapJsonContainerToListJoke(
                         mutableListOf<JokeNet>().apply {
