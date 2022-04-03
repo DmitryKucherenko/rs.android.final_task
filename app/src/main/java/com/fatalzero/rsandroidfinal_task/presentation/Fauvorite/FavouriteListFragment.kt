@@ -6,21 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.utils.DebouncingTextWatcher
-import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavouriteListFragment : Fragment() {
     private var _binding: FauvoriteJokeListFragmentBinding? = null
@@ -31,30 +28,24 @@ class FavouriteListFragment : Fragment() {
     private var searchTextView: EditText? = null
     private var addButton: FloatingActionButton? = null
 
-    private val component by lazy {
-        (requireActivity().application as App).appComponent
-    }
+
 
     private var adapter: FJokeAdapter? = null
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)[FavouriteViewModel::class.java]
-    }
+    private val favouriteViewModel:FavouriteViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        component.inject(this)
+
         _binding = FauvoriteJokeListFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     private fun search(query: String) {
-        viewModel.searchJoke(query).observe(viewLifecycleOwner,
+        favouriteViewModel.searchJoke(query).observe(viewLifecycleOwner,
             { jokes ->
                 jokes?.let {
                     adapter?.submitList(it)
@@ -88,7 +79,7 @@ class FavouriteListFragment : Fragment() {
 
         favoriteItemClickListener = object : FauvItemClickListener {
             override fun onItemClick(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
-                viewModel.sendJoke(joke)
+                favouriteViewModel.sendJoke(joke)
             }
 
             override fun onSaveItemClick(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
@@ -104,7 +95,7 @@ class FavouriteListFragment : Fragment() {
             }
 
             override fun onDeleteItemClick(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
-                viewModel.showDeleteDialog(joke)
+                favouriteViewModel.showDeleteDialog(joke)
             }
         }
         adapter = FJokeAdapter(favoriteItemClickListener)
@@ -115,7 +106,7 @@ class FavouriteListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         setupListener()
-        viewModel.listDbLiveData.observe(viewLifecycleOwner,
+        favouriteViewModel.listDbLiveData.observe(viewLifecycleOwner,
             { jokes ->
                 jokes?.let {
                     adapter?.submitList(it)

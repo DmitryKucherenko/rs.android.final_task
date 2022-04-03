@@ -10,7 +10,6 @@ import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSendUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.SearchUseCase
 import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class FavouriteViewModel (
     private var jokeFListUseCase: JokeFListUseCase,

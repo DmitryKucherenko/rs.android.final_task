@@ -1,12 +1,20 @@
 package com.fatalzero.rsandroidfinal_task
 
 import android.app.Application
-import com.fatalzero.rsandroidfinal_task.di.AppComponent
-import com.fatalzero.rsandroidfinal_task.di.DaggerAppComponent
+import com.fatalzero.rsandroidfinal_task.di.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+
 
 class App : Application() {
-    val appComponent: AppComponent by lazy {
-        DaggerAppComponent.factory().create(applicationContext)
+
+
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            androidContext(applicationContext)
+            modules(listOf(dataModule, domainModule, presentationModule, viewModelModule,utilsModule))
+        }
     }
 
 }

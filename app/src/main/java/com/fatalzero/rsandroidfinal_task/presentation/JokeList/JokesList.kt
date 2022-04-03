@@ -13,31 +13,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.databinding.JokesListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.ItemClickListener
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.LoaderStateAdapter
-import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.Exception
-import javax.inject.Inject
 
 class JokesList : Fragment() {
     private var jokeRecyclerView: RecyclerView? = null
 
-    private val component by lazy {
-        (requireActivity().application as App).appComponent
-    }
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    private val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)[JokesListViewModel::class.java]
-    }
-
+    private val jokesListViewModel:JokesListViewModel by viewModel()
     private var _binding: JokesListFragmentBinding? = null
     private val binding get() = _binding!!
     private var sendItemClickListener: ItemClickListener? = null
@@ -45,7 +34,7 @@ class JokesList : Fragment() {
     private var emptyView: ViewGroup? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        component.inject(this)
+
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         Log.d("JokesListViewModel", "createListFragment")
@@ -61,11 +50,11 @@ class JokesList : Fragment() {
         jokeRecyclerView?.layoutManager = LinearLayoutManager(context)
         sendItemClickListener = object : ItemClickListener {
             override fun onItemClick(joke: Joke?) {
-                viewModel.sendJoke(joke)
+                jokesListViewModel.sendJoke(joke)
             }
 
             override fun onSaveItemClick(joke: Joke?) {
-                viewModel.saveJoke(joke)
+                jokesListViewModel.saveJoke(joke)
             }
 
             override fun onDeleteItemClick(joke: Joke?) {
@@ -88,7 +77,7 @@ class JokesList : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
 
-            viewModel.jokeFlowData.collectLatest { pagingData ->
+            jokesListViewModel.jokeFlowData.collectLatest { pagingData ->
                 adapter?.submitData(pagingData)
             }
         }

@@ -6,12 +6,11 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSaveUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSendUseCase
-import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokePagingSource
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 class JokesListViewModel (

@@ -6,12 +6,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.R
 import com.fatalzero.rsandroidfinal_task.utils.ThemeManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.flow.collectLatest
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 private const val NIGHT_THEME = true
 private const val DAY_THEME = false
@@ -19,15 +19,13 @@ private const val DAY_THEME = false
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
-    private val component by lazy {
-        (application as App).appComponent
-    }
 
-    @Inject
-    lateinit var mainViewModel: MainActivityViewModel
+
+
+    val mainViewModel: MainActivityViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        component.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navController = this.findNavController(R.id.fragment_container)
