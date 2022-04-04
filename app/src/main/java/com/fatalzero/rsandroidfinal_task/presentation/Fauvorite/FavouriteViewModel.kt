@@ -11,7 +11,7 @@ import com.fatalzero.rsandroidfinal_task.domain.usecase.SearchUseCase
 import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import kotlinx.coroutines.launch
 
-class FavouriteViewModel (
+class FavouriteViewModel(
     private var jokeFListUseCase: JokeFListUseCase,
     private var JokeDeleteUseCase: JokeDeleteUseCase,
     private var jokeSearchUseCase: SearchUseCase,

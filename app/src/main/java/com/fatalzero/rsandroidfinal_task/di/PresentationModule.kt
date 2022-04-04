@@ -5,10 +5,10 @@ import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokePagin
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
 import org.koin.dsl.module
 
-val presentationModule = module{
-   factory { JokePagingSource(get()) }
-   factory { SendJokeImpl(get()) }
-   factory { ShowMessage(get()) }
+val presentationModule = module {
+    factory { JokePagingSource(get()) }
+    factory { SendJokeImpl(get()) }
+    factory { ShowMessage(get()) }
 }
 
 

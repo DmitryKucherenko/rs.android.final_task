@@ -24,15 +24,21 @@ private val BASE_URL = "https://v2.jokeapi.dev"
 val dataModule = module {
     single { provideOkHttpClient() }
     single { provideRetrofit(get()) }
-    single{provideApi(get())}
-    single { provideSettingsRepository(get(),get()) }
-    single { provideJokesListRepositoryImpl(get(),get(),get()) }
-    factory <JokesListRepository> { JokesListRepositoryImpl(get(),get(),get()) }
-    factory<IJokesListUseCase> { JokesListUseCase(get()) }
-    factory<SendJoke> { SendJokeImpl(get()) }
-    factory<SettingsRepository> { SettingsRepositoryImpl(get(),get()) }
+    single { provideApi(get()) }
+    single<SettingsRepository> {
+        SettingsRepositoryImpl(
+            get(),
+            get(),
+        )
+    }
+    single<JokesListRepository> {
+        JokesListRepositoryImpl(
+            get(),
+            get(),
+            get(),
+        )
+    }
 }
-
 
 fun provideRetrofit(okhttp: OkHttpClient): Retrofit {
     return Retrofit.Builder()
@@ -47,25 +53,12 @@ fun provideApi(retrofit: Retrofit): ApiService {
     return retrofit.create(ApiService::class.java)
 }
 
-
 fun provideOkHttpClient() = OkHttpClient.Builder().build()
 
 
-fun provideSettingsRepository(
-    context: Context,
-    showMessage: ShowMessage
-): SettingsRepositoryImpl {
-    return SettingsRepositoryImpl(context, showMessage)
-}
 
 
-fun provideJokesListRepositoryImpl(
-    jokesApiService: ApiService,
-    context: Context,
-    message: ShowMessage
-): JokesListRepositoryImpl {
-    return JokesListRepositoryImpl(jokesApiService, context, message)
-}
+
 
 
 

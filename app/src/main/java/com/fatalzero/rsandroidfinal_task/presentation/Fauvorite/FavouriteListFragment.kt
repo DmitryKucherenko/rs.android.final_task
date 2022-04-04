@@ -27,13 +27,8 @@ class FavouriteListFragment : Fragment() {
     private var favoriteRecyclerView: RecyclerView? = null
     private var searchTextView: EditText? = null
     private var addButton: FloatingActionButton? = null
-
-
-
     private var adapter: FJokeAdapter? = null
-
-
-    private val favouriteViewModel:FavouriteViewModel by viewModel()
+    private val favouriteViewModel: FavouriteViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

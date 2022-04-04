@@ -14,6 +14,7 @@ val domainModule = module {
     factory { JokeFListUseCase(get()) }
     factory { JokeDeleteUseCase(get()) }
     factory { GetSettingsUseCase(get()) }
+    factory<IJokesListUseCase> { JokesListUseCase(get()) }
 }
 
 

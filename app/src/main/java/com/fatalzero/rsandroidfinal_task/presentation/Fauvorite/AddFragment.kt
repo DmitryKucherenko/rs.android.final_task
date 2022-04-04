@@ -24,8 +24,7 @@ class AddFragment : Fragment() {
     private val jokeId by lazy { args.jokeId }
 
 
-     val addViewModel:AddViewModel by viewModel()
-
+    val addViewModel: AddViewModel by viewModel()
 
 
     override fun onCreateView(

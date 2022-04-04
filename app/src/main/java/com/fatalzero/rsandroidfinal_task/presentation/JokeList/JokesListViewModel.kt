@@ -13,7 +13,7 @@ import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokePagin
 import kotlinx.coroutines.launch
 
 
-class JokesListViewModel (
+class JokesListViewModel(
     private var jokeSendUseCase: JokeSendUseCase,
     private var jokeSaveUseCase: JokeSaveUseCase,
     jokePagingSource: JokePagingSource

@@ -26,7 +26,7 @@ class JokesList : Fragment() {
     private var jokeRecyclerView: RecyclerView? = null
 
 
-    private val jokesListViewModel:JokesListViewModel by viewModel()
+    private val jokesListViewModel: JokesListViewModel by viewModel()
     private var _binding: JokesListFragmentBinding? = null
     private val binding get() = _binding!!
     private var sendItemClickListener: ItemClickListener? = null

@@ -19,9 +19,6 @@ private const val DAY_THEME = false
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
-
-
-
     val mainViewModel: MainActivityViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
