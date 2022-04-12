@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="JokeCardStyle">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">16dp</item>
+    </style>
+
+    <style name="CategoryStyle">
+        <item name="android:background">@drawable/textview_roundstyle</item>
+    </style>
+
+
+</resources>
