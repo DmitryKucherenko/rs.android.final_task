@@ -11,5 +11,11 @@
         <item name="android:background">@drawable/textview_roundstyle</item>
     </style>
 
+    <style name="ImageButtonStyle">
+        <item name ="android:background">@android:color/transparent</item>
+        <item name = "android:layout_width">48dp</item>
+        <item name = "android:layout_height">48dp</item>
+
+    </style>
 
 </resources>

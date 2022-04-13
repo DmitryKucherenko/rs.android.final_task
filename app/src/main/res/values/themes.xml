@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.DAY" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#ffeaed</item>
-        <item name="colorPrimaryVariant">#ccb8bb</item>
+        <item name="colorPrimary">#ccb8bb</item>
+        <item name="colorPrimaryVariant">#ffeaed</item>
         <item name="colorOnPrimary">#000000</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#c4b7cc</item>

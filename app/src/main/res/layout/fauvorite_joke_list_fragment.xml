@@ -6,16 +6,21 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-    android:background="?colorPrimary"
-        tools:context=".presentation.Fauvorite.FavouriteListFragment">
+    android:background="?colorPrimaryVariant"
+
+        tools:context=".presentation.Fauvorite.FavouriteListFragment"
+
+    >
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginTop="16dp"
+
+        android:layout_marginHorizontal="16dp"
+
         android:hint="Let's find joke!"
 
         app:layout_constraintBottom_toTopOf="@+id/jokeRecyclerView"
@@ -36,8 +41,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/jokeRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="580dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="524dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
