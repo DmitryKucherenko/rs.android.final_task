@@ -6,7 +6,11 @@
     <dimen name="text_size">18sp</dimen>
     <dimen name="large_text_size">20sp</dimen>
     <dimen name="large_dimen">24dp</dimen>
-    <dimen name="category_dimen">32dp</dimen>
+    <dimen name="category_width_dimen">94dp</dimen>
+    <dimen name="category_height_dimen">32dp</dimen>
+    <dimen name="category_padding_dimen">5dp</dimen>
+
     <dimen name="button_dimen">48dp</dimen>
+    <dimen name="bottom_nav_height">56dp</dimen>
 
 </resources>
