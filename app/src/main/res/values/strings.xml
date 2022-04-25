@@ -28,4 +28,23 @@
     <string name="let_s_find_joke">Let\'s find joke!</string>
     <string name="delete_button">delete button</string>
     <string name="edit_buton">edit_buton</string>
+
+    <string name="any_filter">ANY</string>
+    <string name="programming_filter">PROGRAMMING</string>
+    <string name="misc_filter">MISC</string>
+    <string name="dark_filter">DARK</string>
+    <string name="pun_filter">PUN</string>
+    <string name="spooky_filter">SPOOKY</string>
+    <string name="christmas_filter">CHRISTMAS</string>
+
+    <string-array name="filters_array">
+        <item>@string/any_filter</item>
+        <item>@string/programming_filter</item>
+        <item>@string/misc_filter</item>
+        <item>@string/dark_filter</item>
+        <item>@string/pun_filter</item>
+        <item>@string/spooky_filter</item>
+        <item>@string/christmas_filter</item>
+    </string-array>
+
 </resources>

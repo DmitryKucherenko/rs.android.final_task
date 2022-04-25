@@ -54,31 +54,32 @@ class PresentationModule {
     }
 
 
-        @Provides
-        fun provideJokePagingSource(jokesListUseCase: IJokesListUseCase): JokePagingSource {
-            return JokePagingSource(jokesListUseCase)
-        }
+    @Provides
+    fun provideJokePagingSource(jokesListUseCase: IJokesListUseCase): JokePagingSource {
+        return JokePagingSource(jokesListUseCase)
+    }
 
-        @Provides
-        fun provideJokesListViewModel(
-            jokeSendUseCase: JokeSendUseCase,
-            jokeSaveUseCase: JokeSaveUseCase,
-            jokePagingSource: JokePagingSource
-        ): JokesListViewModel {
-            return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource)
-        }
+    @Provides
+    fun provideJokesListViewModel(
+        jokeSendUseCase: JokeSendUseCase,
+        jokeSaveUseCase: JokeSaveUseCase,
+        jokePagingSource: JokePagingSource,
+        filterUseCase: AddFilterUseCase
+    ): JokesListViewModel {
+        return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource, filterUseCase)
+    }
 
-        @Provides
-        fun provideSendJokeImpl(context: Context): SendJokeImpl {
-            return SendJokeImpl(context)
-        }
-
-        @Provides
-        fun provideShowMessage(context: Context): ShowMessage {
-            return ShowMessage(context)
-        }
+    @Provides
+    fun provideSendJokeImpl(context: Context): SendJokeImpl {
+        return SendJokeImpl(context)
+    }
 
 
+
+    @Provides
+    fun provideShowMessage(context: Context): ShowMessage {
+        return ShowMessage(context)
+    }
 
 
 }

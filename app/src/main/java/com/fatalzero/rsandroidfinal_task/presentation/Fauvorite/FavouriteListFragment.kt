@@ -13,12 +13,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
+import com.fatalzero.rsandroidfinal_task.R
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
+import com.fatalzero.rsandroidfinal_task.presentation.Filters
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.utils.DebouncingTextWatcher
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import javax.inject.Inject
 
@@ -30,10 +34,12 @@ class FavouriteListFragment : Fragment() {
     private var favoriteRecyclerView: RecyclerView? = null
     private var searchTextView: EditText? = null
     private var addButton: FloatingActionButton? = null
-
+    private val filtersArray by lazy { resources.getStringArray(R.array.filters_array) }
     private val component by lazy {
         (requireActivity().application as App).appComponent
     }
+
+    private var chipGroupView:ChipGroup? = null
 
     private var adapter: FJokeAdapter? = null
 
@@ -62,15 +68,38 @@ class FavouriteListFragment : Fragment() {
             })
     }
 
+
+
     private fun initView() {
         with(binding) {
             searchTextView = searchText
             favoriteRecyclerView = jokeRecyclerView
             addButton = floatingActionButton
+            chipGroupView = binding.chipGroup
         }
+
+
+        setChipGroup(chipGroupView)
+
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
         navController = findNavController()
 
+    }
+
+
+    private fun setChipGroup(chipGroup: ChipGroup?){
+        for (i in filtersArray.indices){
+            val filter = Filters.values()[i]
+            val chip =
+                (layoutInflater.inflate(R.layout.filter_chip_item, chipGroup, false)) as Chip
+            chip.apply {
+                text = filtersArray[i]
+                id = filter.ordinal
+              //  setChipListener(this, filter)
+                chipGroup?.addView(this)
+            }
+
+        }
     }
 
     private fun setupListener() {
