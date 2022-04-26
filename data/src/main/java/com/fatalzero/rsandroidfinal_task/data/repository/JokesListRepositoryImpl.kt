@@ -106,5 +106,13 @@ class JokesListRepositoryImpl(
         Log.d("REPO removFilter",filters.joinToString(","))
     }
 
+    override fun removeFilter(filter: Filters) {
+        filters.remove(filter)
+    }
+
+    override fun clearFilters() {
+        filters.clear()
+    }
+
 
 }

@@ -40,7 +40,7 @@ class FavouriteListFragment : Fragment() {
         (requireActivity().application as App).appComponent
     }
 
-    private var chipGroupView:ChipGroup? = null
+    private var chipGroupView: ChipGroup? = null
 
     private var adapter: FJokeAdapter? = null
 
@@ -70,7 +70,6 @@ class FavouriteListFragment : Fragment() {
     }
 
 
-
     private fun initView() {
         with(binding) {
             searchTextView = searchText
@@ -79,36 +78,34 @@ class FavouriteListFragment : Fragment() {
             chipGroupView = binding.chipGroup
         }
 
-
         setChipGroup(chipGroupView)
-
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
         navController = findNavController()
 
     }
 
 
-    private fun setChipGroup(chipGroup: ChipGroup?){
-        for (i in filtersArray.indices){
+    private fun setChipGroup(chipGroup: ChipGroup?) {
+        for (i in filtersArray.indices) {
             val filter = Filters.values()[i]
-            val chip =
-                (layoutInflater.inflate(R.layout.filter_chip_item, chipGroup, false)) as Chip
+            val chip = (
+                    layoutInflater
+                        .inflate(R.layout.filter_chip_item, chipGroup, false)) as Chip
             chip.apply {
                 text = filtersArray[i]
                 id = filter.ordinal
                 setChipListener(this, filter)
                 chipGroup?.addView(this)
-                if(filter==Filters.Any)isChecked=true
+                if (filter == Filters.Any) isChecked = true
             }
-
         }
     }
 
     private fun setChipListener(chip: Chip, filter: Filters) =
         chip.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked)viewModel.addFilter(filter) else
+            if (isChecked) viewModel.addFilter(filter) else
                 viewModel.removeFilter(filter)
-                search(searchTextView?.text.toString())
+            search(searchTextView?.text.toString())
         }
 
     private fun setupListener() {
@@ -153,12 +150,13 @@ class FavouriteListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         setupListener()
-        viewModel.listDbLiveData.observe(viewLifecycleOwner,
-            { jokes ->
-                jokes?.let {
-                    adapter?.submitList(it)
-                }
-            })
+        viewModel.listDbLiveData.observe(
+            viewLifecycleOwner
+        ) { jokes ->
+            jokes?.let {
+                adapter?.submitList(it)
+            }
+        }
     }
 
     override fun onDestroyView() {

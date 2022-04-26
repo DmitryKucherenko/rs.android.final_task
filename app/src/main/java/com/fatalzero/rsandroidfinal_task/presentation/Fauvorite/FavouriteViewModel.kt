@@ -2,6 +2,7 @@ package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fatalzero.rsandroidfinal_task.domain.model.Filters
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FavouriteViewModel (
-    private var jokeFListUseCase: JokeFListUseCase,
+    jokeFListUseCase: JokeFListUseCase,
     private var JokeDeleteUseCase: JokeDeleteUseCase,
     private var jokeSearchUseCase: SearchUseCase,
     private var jokeSendUseCase: JokeSendUseCase,
@@ -20,7 +21,7 @@ class FavouriteViewModel (
     private var addFilterUseCase: AddFilterUseCase,
     private var removeFilterUseCase: RemoveFilterUseCase
 ) : ViewModel() {
-
+    var checkedFilters = MutableLiveData<List<Filters>>()
     var listDbLiveData = jokeFListUseCase()
 
     fun sendJoke(joke: Joke?) {
@@ -48,6 +49,7 @@ class FavouriteViewModel (
     fun addFilter(filter: Filters){
         Log.d("REPO","addFilter")
         addFilterUseCase(filter)
+
     }
 
     fun removeFilter(filter: Filters) {

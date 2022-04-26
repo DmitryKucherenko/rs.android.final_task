@@ -38,7 +38,6 @@ class JokesListViewModel (
 
     fun saveJoke(joke: Joke?) {
         viewModelScope.launch {
-            Log.d("JOKE_LIST", joke.toString())
             jokeSaveUseCase(joke)
         }
     }
