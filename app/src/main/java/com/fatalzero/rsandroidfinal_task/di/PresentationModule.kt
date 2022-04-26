@@ -1,8 +1,6 @@
 package com.fatalzero.rsandroidfinal_task.di
 
 import android.content.Context
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.fatalzero.rsandroidfinal_task.domain.usecase.*
 import com.fatalzero.rsandroidfinal_task.domain.utils.SendJokeImpl
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.AddViewModel
@@ -11,7 +9,6 @@ import com.fatalzero.rsandroidfinal_task.presentation.JokeList.JokesListViewMode
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokePagingSource
 import com.fatalzero.rsandroidfinal_task.presentation.MainActivityViewModel
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
-import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import dagger.Module
 import dagger.Provides
@@ -42,14 +39,18 @@ class PresentationModule {
         jokeDeleteUseCase: JokeDeleteUseCase,
         jokeSearchUseCase: SearchUseCase,
         jokeSendUseCase: JokeSendUseCase,
-        dialogService: DialogService
+        dialogService: DialogService,
+        addFilterUseCase: AddFilterUseCase,
+        removeFilterUseCase: RemoveFilterUseCase
     ): FavouriteViewModel {
         return FavouriteViewModel(
             jokeFListUseCase,
             jokeDeleteUseCase,
             jokeSearchUseCase,
             jokeSendUseCase,
-            dialogService
+            dialogService,
+            addFilterUseCase,
+            removeFilterUseCase
         )
     }
 
@@ -64,9 +65,10 @@ class PresentationModule {
         jokeSendUseCase: JokeSendUseCase,
         jokeSaveUseCase: JokeSaveUseCase,
         jokePagingSource: JokePagingSource,
-        filterUseCase: AddFilterUseCase
+        addFilterUseCase: AddFilterUseCase,
+        removeFilterUseCase: RemoveFilterUseCase
     ): JokesListViewModel {
-        return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource, filterUseCase)
+        return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource, addFilterUseCase,removeFilterUseCase)
     }
 
     @Provides

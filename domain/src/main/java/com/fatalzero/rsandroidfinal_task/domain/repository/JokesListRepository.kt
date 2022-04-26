@@ -14,4 +14,5 @@ interface JokesListRepository {
     fun getJokesListFromDB(): LiveData<List<Joke>>
     fun searchQuery(query:String):LiveData<List<Joke>>
     fun addFilter(filter: Filters)
+     fun removeFilter(filter: Filters)
 }

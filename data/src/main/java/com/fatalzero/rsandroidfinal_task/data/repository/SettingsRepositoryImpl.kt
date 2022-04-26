@@ -15,7 +15,6 @@ class SettingsRepositoryImpl(
     private var showMessage: ShowMessage
 ) : SettingsRepository {
 
-
     private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 
     override fun saveSettings(userSettings: UserSettings): Boolean {

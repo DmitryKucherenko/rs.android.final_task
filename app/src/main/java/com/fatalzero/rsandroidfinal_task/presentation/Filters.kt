@@ -1,5 +1,5 @@
 package com.fatalzero.rsandroidfinal_task.presentation
 
 enum class Filters {
-    ANY, PROGRAMMING, MISC, DARK, PUN, SPOOKY,CHRISTMAS
+    Any, Programmin, Misc, Dark, Pun, Spooky, Christmas
 }

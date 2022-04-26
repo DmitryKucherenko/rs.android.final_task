@@ -15,9 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.R
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
+import com.fatalzero.rsandroidfinal_task.domain.model.Filters
+import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
-import com.fatalzero.rsandroidfinal_task.presentation.Filters
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.utils.DebouncingTextWatcher
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
@@ -95,12 +96,20 @@ class FavouriteListFragment : Fragment() {
             chip.apply {
                 text = filtersArray[i]
                 id = filter.ordinal
-              //  setChipListener(this, filter)
+                setChipListener(this, filter)
                 chipGroup?.addView(this)
+                if(filter==Filters.Any)isChecked=true
             }
 
         }
     }
+
+    private fun setChipListener(chip: Chip, filter: Filters) =
+        chip.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked)viewModel.addFilter(filter) else
+                viewModel.removeFilter(filter)
+                search(searchTextView?.text.toString())
+        }
 
     private fun setupListener() {
         addButton?.setOnClickListener {
@@ -116,11 +125,11 @@ class FavouriteListFragment : Fragment() {
         )
 
         favoriteItemClickListener = object : FauvItemClickListener {
-            override fun onItemClick(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
+            override fun onItemClick(joke: Joke?) {
                 viewModel.sendJoke(joke)
             }
 
-            override fun onSaveItemClick(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
+            override fun onSaveItemClick(joke: Joke?) {
                 throw Exception("NOT SUPPORTED!")
             }
 
@@ -132,7 +141,7 @@ class FavouriteListFragment : Fragment() {
                 )
             }
 
-            override fun onDeleteItemClick(joke: com.fatalzero.rsandroidfinal_task.domain.model.Joke?) {
+            override fun onDeleteItemClick(joke: Joke?) {
                 viewModel.showDeleteDialog(joke)
             }
         }

@@ -12,6 +12,7 @@ import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSaveUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSendUseCase
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.usecase.AddFilterUseCase
+import com.fatalzero.rsandroidfinal_task.domain.usecase.RemoveFilterUseCase
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokePagingSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -21,20 +22,15 @@ class JokesListViewModel (
     private var jokeSendUseCase: JokeSendUseCase,
     private var jokeSaveUseCase: JokeSaveUseCase,
     private var jokePagingSource: JokePagingSource,
-    private var filterUseCase: AddFilterUseCase
+    private var addFilterUseCase: AddFilterUseCase,
+    private var removeFilterUseCase: RemoveFilterUseCase
 ) : ViewModel() {
 
-    var jokeFlowData: Flow<PagingData<Joke>>? = null
-    init {
-        update()
-    }
-
-    fun update(){
-        jokeFlowData = Pager(
+    var jokeFlowData = Pager(
             config = PagingConfig(pageSize = 1, enablePlaceholders = false),
             pagingSourceFactory = { jokePagingSource }
         ).flow.cachedIn(viewModelScope)
-    }
+
 
     fun sendJoke(joke: Joke?) {
         jokeSendUseCase.execute(joke)
@@ -45,12 +41,6 @@ class JokesListViewModel (
             Log.d("JOKE_LIST", joke.toString())
             jokeSaveUseCase(joke)
         }
-    }
-
-    fun addFilter(filter: Filters){
-        Log.d("REPO","addFilter")
-        filterUseCase(filter)
-        update()
     }
 
 
