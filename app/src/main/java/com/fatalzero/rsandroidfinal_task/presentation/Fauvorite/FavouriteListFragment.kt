@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -40,7 +41,7 @@ class FavouriteListFragment : Fragment() {
         (requireActivity().application as App).appComponent
     }
 
-    private var chipGroupView: ChipGroup? = null
+    private lateinit var chipGroupView: ChipGroup
 
     private var adapter: FJokeAdapter? = null
 
@@ -78,7 +79,7 @@ class FavouriteListFragment : Fragment() {
             chipGroupView = binding.chipGroup
         }
 
-        setChipGroup(chipGroupView)
+
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
         navController = findNavController()
 
@@ -96,25 +97,38 @@ class FavouriteListFragment : Fragment() {
                 id = filter.ordinal
                 setChipListener(this, filter)
                 chipGroup?.addView(this)
-                if (filter == Filters.Any) isChecked = true
+                //if (filter == Filters.Any) isChecked = true
             }
         }
     }
 
     private fun setChipListener(chip: Chip, filter: Filters) =
         chip.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) viewModel.addFilter(filter) else
-                viewModel.removeFilter(filter)
+
+            val checkeFilters = requireNotNull(viewModel.checkedFilters.value)
+//            if (isChecked) viewModel.addFilter(filter) else
+//                viewModel.removeFilter(filter)
+            when{
+                filter == Filters.Any &&
+                        filter !in checkeFilters && isChecked->viewModel.clearFilter()
+                filter !in checkeFilters && isChecked -> viewModel.addFilter(filter)
+                filter in checkeFilters && !isChecked -> viewModel.removeFilter(filter)
+            }
+
+
             search(searchTextView?.text.toString())
         }
 
     private fun setupListener() {
+        setChipGroup(chipGroupView)
+
         addButton?.setOnClickListener {
             navController?.navigate(
                 FavouriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
                     UNDEFINED_ID
                 )
             )
+
         }
 
         searchTextView?.addTextChangedListener(
@@ -144,12 +158,35 @@ class FavouriteListFragment : Fragment() {
         }
         adapter = FJokeAdapter(favoriteItemClickListener)
         favoriteRecyclerView?.adapter = adapter
+
+    }
+
+    private fun udateChipGroup(filters: List<Filters>, chipGroupView: ChipGroup) {
+          val anyChip = chipGroupView[Filters.Any.ordinal] as Chip
+        val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
+        if (checkedFilters.contains(Filters.Any)) {
+            chipGroupView.clearCheck()
+            anyChip.isChecked = true
+            anyChip.isEnabled = false
+        } else {
+            checkedFilters.forEach {
+                chipGroupView.check(it.ordinal)
+            }
+            anyChip.isChecked = false
+            anyChip.isEnabled = true
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initView()
+
         setupListener()
+
+
+
+
         viewModel.listDbLiveData.observe(
             viewLifecycleOwner
         ) { jokes ->
@@ -157,6 +194,12 @@ class FavouriteListFragment : Fragment() {
                 adapter?.submitList(it)
             }
         }
+
+        viewModel.checkedFilters.observe(viewLifecycleOwner){
+                filters -> udateChipGroup(filters,chipGroupView)
+        }
+
+
     }
 
     override fun onDestroyView() {

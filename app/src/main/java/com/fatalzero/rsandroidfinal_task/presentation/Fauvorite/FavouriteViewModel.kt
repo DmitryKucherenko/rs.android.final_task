@@ -12,16 +12,19 @@ import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FavouriteViewModel (
+class FavouriteViewModel(
     jokeFListUseCase: JokeFListUseCase,
     private var JokeDeleteUseCase: JokeDeleteUseCase,
     private var jokeSearchUseCase: SearchUseCase,
     private var jokeSendUseCase: JokeSendUseCase,
     private var dialogService: DialogService,
     private var addFilterUseCase: AddFilterUseCase,
-    private var removeFilterUseCase: RemoveFilterUseCase
+    private var removeFilterUseCase: RemoveFilterUseCase,
+    private var clearFilterUseCase: ClearFilterUseCase
 ) : ViewModel() {
-    var checkedFilters = MutableLiveData<List<Filters>>()
+    private var _checkedFilters = MutableLiveData(mutableListOf(Filters.Any))
+    val checkedFilters: LiveData<MutableList<Filters>> get() = requireNotNull(_checkedFilters)
+
     var listDbLiveData = jokeFListUseCase()
 
     fun sendJoke(joke: Joke?) {
@@ -46,14 +49,38 @@ class FavouriteViewModel (
     }
 
 
-    fun addFilter(filter: Filters){
-        Log.d("REPO","addFilter")
+    fun addFilter(filter: Filters) {
+        Log.d("REPO", "addFilter")
+        val filters = checkedFilters.value
+        filters?.apply {
+            remove(Filters.Any)
+            add(filter)
+        }
+        _checkedFilters.value = filters
         addFilterUseCase(filter)
 
     }
 
     fun removeFilter(filter: Filters) {
+
+        Log.d("REPO", "addFilter")
+        val filters = checkedFilters.value
+        filters?.apply {
+            if (size == 1) _checkedFilters.value = mutableListOf(Filters.Any)
+            else {
+                remove(filter)
+                _checkedFilters.value = this
+            }
+        }
         removeFilterUseCase(filter)
+    }
+
+    fun clearFilter(){
+        _checkedFilters.value = mutableListOf(Filters.Any)
+        clearFilterUseCase()
+
+
+
     }
 
 }

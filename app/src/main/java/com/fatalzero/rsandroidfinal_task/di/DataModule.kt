@@ -11,6 +11,7 @@ import com.fatalzero.rsandroidfinal_task.data.network.ApiService
 import com.fatalzero.rsandroidfinal_task.data.repository.JokesListRepositoryImpl
 import com.fatalzero.rsandroidfinal_task.data.repository.SettingsRepositoryImpl
 import com.fatalzero.rsandroidfinal_task.domain.usecase.AddFilterUseCase
+import com.fatalzero.rsandroidfinal_task.domain.usecase.ClearFilterUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.RemoveFilterUseCase
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
 
@@ -66,6 +67,11 @@ class DataModule {
     @Provides
     fun provideRemoveFilterUseCase(repository:JokesListRepositoryImpl): RemoveFilterUseCase {
         return RemoveFilterUseCase(repository)
+    }
+
+    @Provides
+    fun provideClearFilterUseCase(repository:JokesListRepositoryImpl): ClearFilterUseCase {
+        return ClearFilterUseCase(repository)
     }
 
 }

@@ -41,7 +41,8 @@ class PresentationModule {
         jokeSendUseCase: JokeSendUseCase,
         dialogService: DialogService,
         addFilterUseCase: AddFilterUseCase,
-        removeFilterUseCase: RemoveFilterUseCase
+        removeFilterUseCase: RemoveFilterUseCase,
+        clearFilterUseCase: ClearFilterUseCase
     ): FavouriteViewModel {
         return FavouriteViewModel(
             jokeFListUseCase,
@@ -50,7 +51,8 @@ class PresentationModule {
             jokeSendUseCase,
             dialogService,
             addFilterUseCase,
-            removeFilterUseCase
+            removeFilterUseCase,
+            clearFilterUseCase
         )
     }
 
@@ -66,7 +68,8 @@ class PresentationModule {
         jokeSaveUseCase: JokeSaveUseCase,
         jokePagingSource: JokePagingSource,
         addFilterUseCase: AddFilterUseCase,
-        removeFilterUseCase: RemoveFilterUseCase
+        removeFilterUseCase: RemoveFilterUseCase,
+        clearFilterUseCase: ClearFilterUseCase
     ): JokesListViewModel {
         return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource, addFilterUseCase,removeFilterUseCase)
     }
