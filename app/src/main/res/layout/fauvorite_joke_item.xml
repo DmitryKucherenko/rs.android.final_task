@@ -1,12 +1,8 @@
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardBackgroundColor="#ffb2ff"
-
+    style="@style/JokeCardStyle"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -16,16 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <TextView
             android:id="@+id/categoryText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="#FF9800"
-            android:padding="3dp"
+            style="@style/CategoryStyle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.099"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Category text"
@@ -33,10 +24,7 @@
 
         <TextView
             android:id="@+id/jokeText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="3dp"
-            android:textSize="18sp"
+           style="@style/JokeTextStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -48,42 +36,34 @@
 
         <ImageButton
             android:id="@+id/deleteButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="delete button"
-            android:visibility="visible"
-            app:layout_constraintEnd_toStartOf="@+id/editButton"
-            app:layout_constraintHorizontal_bias="0.5"
+            style="@style/ImageButtonStyle"
+            android:layout_marginStart="16dp"
+            android:contentDescription="@string/delete_button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/jokeText"
-            app:srcCompat="@android:drawable/ic_menu_delete"
-            tools:ignore="ImageContrastCheck" />
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_delete_black_36dp"/>
 
         <ImageButton
             android:id="@+id/shareButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            style="@style/ImageButtonStyle"
             android:contentDescription="@string/share_buton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/editButton"
             app:layout_constraintTop_toBottomOf="@+id/jokeText"
-            app:srcCompat="@android:drawable/ic_menu_share"
+            app:srcCompat="@drawable/ic_share_black_36dp"
             tools:ignore="ImageContrastCheck" />
 
         <ImageButton
             android:id="@+id/editButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/shareButton"
-            app:layout_constraintHorizontal_bias="0.5"
+            style="@style/ImageButtonStyle"
+            android:contentDescription="@string/edit_buton"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/deleteButton"
             app:layout_constraintTop_toBottomOf="@+id/jokeText"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@drawable/ic_edit_black_36dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

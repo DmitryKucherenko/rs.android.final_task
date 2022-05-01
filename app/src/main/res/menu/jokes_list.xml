@@ -5,6 +5,7 @@
         android:id="@+id/jokesList"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Home"
+        
 
         />
     <item

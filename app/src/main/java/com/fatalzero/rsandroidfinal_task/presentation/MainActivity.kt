@@ -44,6 +44,15 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.jokesList -> setTitle("HOME")
+                R.id.bookMarksFragment -> setTitle("BOOKMARKS")
+                R.id.settingsFragment -> setTitle("SETTINGS")
+            }
+        }
+
     }
 
 
