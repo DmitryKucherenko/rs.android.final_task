@@ -45,7 +45,6 @@ class PresentationModule {
         clearFilterUseCase: ClearFilterUseCase
     ): FavouriteViewModel {
         return FavouriteViewModel(
-            jokeFListUseCase,
             jokeDeleteUseCase,
             jokeSearchUseCase,
             jokeSendUseCase,
@@ -55,7 +54,6 @@ class PresentationModule {
             clearFilterUseCase
         )
     }
-
 
     @Provides
     fun provideJokePagingSource(jokesListUseCase: IJokesListUseCase): JokePagingSource {
@@ -71,15 +69,13 @@ class PresentationModule {
         removeFilterUseCase: RemoveFilterUseCase,
         clearFilterUseCase: ClearFilterUseCase
     ): JokesListViewModel {
-        return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource, addFilterUseCase,removeFilterUseCase)
+        return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource)
     }
 
     @Provides
     fun provideSendJokeImpl(context: Context): SendJokeImpl {
         return SendJokeImpl(context)
     }
-
-
 
     @Provides
     fun provideShowMessage(context: Context): ShowMessage {

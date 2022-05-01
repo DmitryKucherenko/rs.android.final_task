@@ -22,8 +22,6 @@ class JokesListViewModel (
     private var jokeSendUseCase: JokeSendUseCase,
     private var jokeSaveUseCase: JokeSaveUseCase,
     private var jokePagingSource: JokePagingSource,
-    private var addFilterUseCase: AddFilterUseCase,
-    private var removeFilterUseCase: RemoveFilterUseCase
 ) : ViewModel() {
 
     var jokeFlowData = Pager(

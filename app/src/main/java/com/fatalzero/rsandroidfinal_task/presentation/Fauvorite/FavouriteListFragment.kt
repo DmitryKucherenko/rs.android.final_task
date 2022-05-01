@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -36,6 +37,7 @@ class FavouriteListFragment : Fragment() {
     private var favoriteRecyclerView: RecyclerView? = null
     private var searchTextView: EditText? = null
     private var addButton: FloatingActionButton? = null
+    private lateinit var searchLiveData: LiveData<List<Joke>>
     private val filtersArray by lazy { resources.getStringArray(R.array.filters_array) }
     private val component by lazy {
         (requireActivity().application as App).appComponent
@@ -62,12 +64,7 @@ class FavouriteListFragment : Fragment() {
     }
 
     private fun search(query: String) {
-        viewModel.searchJoke(query).observe(viewLifecycleOwner,
-            { jokes ->
-                jokes?.let {
-                    adapter?.submitList(it)
-                }
-            })
+       viewModel.searchJoke(query)
     }
 
 
@@ -97,26 +94,19 @@ class FavouriteListFragment : Fragment() {
                 id = filter.ordinal
                 setChipListener(this, filter)
                 chipGroup?.addView(this)
-                //if (filter == Filters.Any) isChecked = true
             }
         }
     }
 
     private fun setChipListener(chip: Chip, filter: Filters) =
         chip.setOnCheckedChangeListener { _, isChecked ->
-
-            val checkeFilters = requireNotNull(viewModel.checkedFilters.value)
-//            if (isChecked) viewModel.addFilter(filter) else
-//                viewModel.removeFilter(filter)
-            when{
+            val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
+            when {
                 filter == Filters.Any &&
-                        filter !in checkeFilters && isChecked->viewModel.clearFilter()
-                filter !in checkeFilters && isChecked -> viewModel.addFilter(filter)
-                filter in checkeFilters && !isChecked -> viewModel.removeFilter(filter)
+                        filter !in checkedFilters && isChecked -> viewModel.clearFilter()
+                filter !in checkedFilters && isChecked -> viewModel.addFilter(filter)
+                filter in checkedFilters && !isChecked -> viewModel.removeFilter(filter)
             }
-
-
-            search(searchTextView?.text.toString())
         }
 
     private fun setupListener() {
@@ -128,11 +118,9 @@ class FavouriteListFragment : Fragment() {
                     UNDEFINED_ID
                 )
             )
-
         }
-
         searchTextView?.addTextChangedListener(
-            DebouncingTextWatcher.getWatcher(lifecycleScope) { search(it.toString()) }
+            DebouncingTextWatcher.getWatcher(lifecycleScope) {search(it.toString()) }
         )
 
         favoriteItemClickListener = object : FauvItemClickListener {
@@ -158,11 +146,10 @@ class FavouriteListFragment : Fragment() {
         }
         adapter = FJokeAdapter(favoriteItemClickListener)
         favoriteRecyclerView?.adapter = adapter
-
     }
 
     private fun udateChipGroup(filters: List<Filters>, chipGroupView: ChipGroup) {
-          val anyChip = chipGroupView[Filters.Any.ordinal] as Chip
+        val anyChip = chipGroupView[Filters.Any.ordinal] as Chip
         val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
         if (checkedFilters.contains(Filters.Any)) {
             chipGroupView.clearCheck()
@@ -179,13 +166,9 @@ class FavouriteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.clearFilter()
         initView()
-
         setupListener()
-
-
-
 
         viewModel.listDbLiveData.observe(
             viewLifecycleOwner
@@ -195,10 +178,9 @@ class FavouriteListFragment : Fragment() {
             }
         }
 
-        viewModel.checkedFilters.observe(viewLifecycleOwner){
-                filters -> udateChipGroup(filters,chipGroupView)
+        viewModel.checkedFilters.observe(viewLifecycleOwner) { filters ->
+            udateChipGroup(filters, chipGroupView)
         }
-
 
     }
 

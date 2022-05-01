@@ -18,13 +18,10 @@ class JokesListRepositoryImpl(
     private var showMessage: ShowMessage
 ) :
     JokesListRepository {
-
-
     private var jokeDao = AppDatabase.getInstance(context).jokeDao()
     private val filters = mutableSetOf<Filters>()
     override suspend fun getJokesList(count: Int, range: String): List<Joke> {
         try {
-
             return JokeMapper.mapJsonContainerToListJoke(
                 jokesApiService.getResponse(
                     count,
@@ -82,7 +79,7 @@ class JokesListRepositoryImpl(
 
     override fun searchQuery(query: String): LiveData<List<Joke>> {
         try {
-
+            Log.d("REPO","FROM REPOSITORY set FILTERS IS $filters")
             return Transformations.map(jokeDao.search(query,if(filters.isEmpty())Filters.values().map{it.toString()} else filters.map { it.toString()})){
                 it.map{
                     JokeMapper.jokeDbModelToJoke(it)
@@ -97,6 +94,7 @@ class JokesListRepositoryImpl(
 
     override fun addFilter(filter: Filters) {
         filters.add(filter)
+
     }
 
 
