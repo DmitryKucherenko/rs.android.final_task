@@ -29,13 +29,13 @@
     <string name="delete_button">delete button</string>
     <string name="edit_buton">edit_buton</string>
 
-    <string name="any_filter">ANY</string>
-    <string name="programming_filter">PROGRAMMING</string>
-    <string name="misc_filter">MISC</string>
-    <string name="dark_filter">DARK</string>
-    <string name="pun_filter">PUN</string>
-    <string name="spooky_filter">SPOOKY</string>
-    <string name="christmas_filter">CHRISTMAS</string>
+    <string name="any_filter">Any</string>
+    <string name="programming_filter">Programming</string>
+    <string name="misc_filter">Misc</string>
+    <string name="dark_filter">Dark</string>
+    <string name="pun_filter">Pun</string>
+    <string name="spooky_filter">Spooky</string>
+    <string name="christmas_filter">Christmas</string>
 
     <string-array name="filters_array">
         <item>@string/any_filter</item>

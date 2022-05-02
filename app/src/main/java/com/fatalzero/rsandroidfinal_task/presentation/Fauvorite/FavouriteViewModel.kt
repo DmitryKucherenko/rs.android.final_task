@@ -79,7 +79,7 @@ class FavouriteViewModel(
     fun clearFilter() {
         Log.d("REPO", "clear filter")
         clearFilterUseCase()
-        _checkedFilters.value = mutableListOf(Filters.Any)
+       _checkedFilters.value = mutableListOf(Filters.Any)
     }
 }
 

@@ -1,6 +1,7 @@
 package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -98,6 +99,11 @@ class FavouriteListFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("REPO","SHOW")
+    }
+
     private fun setChipListener(chip: Chip, filter: Filters) =
         chip.setOnCheckedChangeListener { _, isChecked ->
             val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
@@ -105,7 +111,7 @@ class FavouriteListFragment : Fragment() {
                 filter == Filters.Any &&
                         filter !in checkedFilters && isChecked -> viewModel.clearFilter()
                 filter !in checkedFilters && isChecked -> viewModel.addFilter(filter)
-                filter in checkedFilters && !isChecked -> viewModel.removeFilter(filter)
+                filter in checkedFilters && !isChecked && filter != Filters.Any-> viewModel.removeFilter(filter)
             }
         }
 
@@ -118,6 +124,7 @@ class FavouriteListFragment : Fragment() {
                     UNDEFINED_ID
                 )
             )
+
         }
         searchTextView?.addTextChangedListener(
             DebouncingTextWatcher.getWatcher(lifecycleScope) {search(it.toString()) }
