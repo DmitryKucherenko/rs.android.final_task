@@ -35,7 +35,6 @@ class PresentationModule {
 
     @Provides
     fun provideFavouriteViewModel(
-        jokeFListUseCase: JokeFListUseCase,
         jokeDeleteUseCase: JokeDeleteUseCase,
         jokeSearchUseCase: SearchUseCase,
         jokeSendUseCase: JokeSendUseCase,
@@ -68,9 +67,6 @@ class PresentationModule {
         jokeSendUseCase: JokeSendUseCase,
         jokeSaveUseCase: JokeSaveUseCase,
         jokePagingSource: JokePagingSource,
-        addFilterUseCase: AddFilterUseCase,
-        removeFilterUseCase: RemoveFilterUseCase,
-        clearFilterUseCase: ClearFilterUseCase
     ): JokesListViewModel {
         return JokesListViewModel(jokeSendUseCase, jokeSaveUseCase, jokePagingSource)
     }

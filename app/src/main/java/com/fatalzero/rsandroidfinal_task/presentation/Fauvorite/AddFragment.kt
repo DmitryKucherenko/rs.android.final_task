@@ -55,22 +55,10 @@ class AddFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var categoryArray = getResources().getStringArray(R.array.filters_array)
-            .filterNot { it == Filters.Any.toString() }
-
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            categoryArray
-        )
-
-        binding.chooseCategory.adapter = adapter
-
-
         navController = findNavController()
-        viewModel.finish.observe(viewLifecycleOwner, {
+        viewModel.finish.observe(viewLifecycleOwner) {
             if (it) navController.popBackStack()
-        })
+        }
 
         if (jokeId == UNDEFINED_ID) {
             launchAddMode()
@@ -84,8 +72,7 @@ class AddFragment : Fragment() {
             viewModel.save(
                 Joke(
                     id = GenID.generateId(),
-//                    category = binding.categoryEdit.text.toString(),
-                    category = binding.chooseCategory.selectedItem.toString(),
+                    category = binding.editCategory.text.toString(),
                     joke = binding.JokeTextMultiLine.text.toString()
                 )
             )
@@ -95,13 +82,12 @@ class AddFragment : Fragment() {
     private fun launcEditeMode() {
         viewModel.get(jokeId)
         viewModel.joke.observe(viewLifecycleOwner, {
-            binding.chooseCategory.setSpinnerText(it.category)
+            binding.editCategory.setText(it.category)
             binding.JokeTextMultiLine.setText(it.joke)
         })
         binding.imageButton.setOnClickListener {
             val jokeEdit = viewModel.joke.value?.copy(
-//                category = binding.categoryEdit.text.toString(),
-                category = binding.chooseCategory.selectedItem.toString(),
+                category = binding.editCategory.text.toString(),
                 joke = binding.JokeTextMultiLine.text.toString()
             )
             Log.d("REPO", "${jokeEdit}")
@@ -112,14 +98,6 @@ class AddFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun Spinner.setSpinnerText(text: String) {
-        for (i in 0 until this.adapter.count) {
-            if (this.adapter.getItem(i).toString().contains(text)) {
-                this.setSelection(i)
-            }
-        }
     }
 
 }

@@ -18,14 +18,14 @@
         android:background="@drawable/back"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Joke's Text"
+        android:hint="@string/joke_s_text"
         android:inputType="textMultiLine"
         android:lines="10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseCategory"
+        app:layout_constraintTop_toBottomOf="@+id/editCategory"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
@@ -41,14 +41,14 @@
         app:layout_constraintEnd_toEndOf="@+id/JokeTextMultiLine"
         app:layout_constraintTop_toBottomOf="@+id/JokeTextMultiLine" />
 
-    <Spinner
-        android:id="@+id/chooseCategory"
-        style="@style/spinner_style"
+    <EditText
+        android:id="@+id/editCategory"
+        android:hint="@string/joke_s_category"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
-
-        android:contentDescription="choose category"
+        android:background="@drawable/back"
+        android:contentDescription="@string/type_category"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"

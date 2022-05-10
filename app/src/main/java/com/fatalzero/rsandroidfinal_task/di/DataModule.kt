@@ -49,13 +49,20 @@ class DataModule {
         return SettingsRepositoryImpl(context, showMessage)
     }
 
-
+    @Singleton
+    @Provides
+    fun provideJokesListRepositoryImpl(
+        jokesApiService: ApiService,
+        context: Context,
+        message: ShowMessage
+    ): JokesListRepositoryImpl {
+        return JokesListRepositoryImpl(jokesApiService, context, message)
+    }
 
     @Provides
     fun provideAddFilterUseCase(repository: JokesListRepository): AddFilterUseCase {
         return AddFilterUseCase(repository)
     }
-
 
     @Provides
     fun provideRemoveFilterUseCase(repository:JokesListRepository): RemoveFilterUseCase {

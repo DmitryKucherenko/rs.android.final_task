@@ -34,10 +34,7 @@ class AddViewModel(
 
     fun get(id: String) {
         viewModelScope.launch {
-            jokeGetUseCase(id)?.let {
-                _joke.postValue(it)
-            }
-
+                _joke.postValue(jokeGetUseCase(id))
         }
     }
 }

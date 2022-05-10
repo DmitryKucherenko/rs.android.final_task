@@ -36,6 +36,9 @@
     <string name="pun_filter">Pun</string>
     <string name="spooky_filter">Spooky</string>
     <string name="christmas_filter">Christmas</string>
+    <string name="joke_s_text">Joke\'s Text</string>
+    <string name="joke_s_category">Joke\'s Category</string>
+    <string name="type_category">type category</string>
 
     <string-array name="filters_array">
         <item>@string/any_filter</item>
