@@ -4,13 +4,19 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.fatalzero.rsandroidfinal_task.data.database.AppDatabase
 import com.fatalzero.rsandroidfinal_task.data.mapper.JokeMapper
 import com.fatalzero.rsandroidfinal_task.data.network.ApiService
-import com.fatalzero.rsandroidfinal_task.domain.model.Filters
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.repository.JokesListRepository
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
+
+private const val QUERY_PATTERN =
+    "SELECT * FROM jokedbmodel WHERE (%s joke like \"%s\") COLLATE NOCASE"
+private const val FILTER_CONDITIONS = "category IN (%s) AND"
+private const val SEPARATOR = "\",\""
+private const val PREFIX_POSTFIX = "\""
 
 class JokesListRepositoryImpl(
     private var jokesApiService: ApiService,
@@ -19,7 +25,8 @@ class JokesListRepositoryImpl(
 ) :
     JokesListRepository {
     private var jokeDao = AppDatabase.getInstance(context).jokeDao()
-    private val filters = mutableSetOf<Filters>()
+    private val filters = mutableSetOf<String>()
+
     override suspend fun getJokesList(count: Int, range: String): List<Joke> {
         try {
             return JokeMapper.mapJsonContainerToListJoke(
@@ -77,11 +84,31 @@ class JokesListRepositoryImpl(
         }
     }
 
-    override fun searchQuery(query: String): LiveData<List<Joke>> {
+    override fun getCategories(): LiveData<List<String>> {
         try {
-            Log.d("REPO","FROM REPOSITORY set FILTERS IS $filters")
-            return Transformations.map(jokeDao.search(query,if(filters.isEmpty())Filters.values().map{it.toString()} else filters.map { it.toString()})){
-                it.map{
+            return jokeDao.getCategories()
+        } catch (e: Exception) {
+            showMessage(e.toString())
+            throw e
+        }
+    }
+
+    private fun buildQuery(searchText: String): SimpleSQLiteQuery {
+
+        val filterQuery = if (filters.isNotEmpty()) String.format(
+            FILTER_CONDITIONS,
+            filters.joinToString(SEPARATOR, prefix =PREFIX_POSTFIX, postfix = PREFIX_POSTFIX)
+        ) else ""
+
+        return SimpleSQLiteQuery(String.format(QUERY_PATTERN, filterQuery, searchText))
+    }
+
+    override fun searchQuery(searchText: String): LiveData<List<Joke>> {
+        try {
+            return Transformations.map(
+                jokeDao.search(buildQuery(searchText))
+            ) {
+                it.map {
                     JokeMapper.jokeDbModelToJoke(it)
                 }
             }
@@ -92,14 +119,13 @@ class JokesListRepositoryImpl(
     }
 
 
-    override fun addFilter(filter: Filters) {
+    override fun addFilter(filter: String) {
         filters.add(filter)
 
     }
 
 
-
-    override fun removeFilter(filter: Filters) {
+    override fun removeFilter(filter: String) {
         filters.remove(filter)
     }
 

@@ -42,7 +42,8 @@ class PresentationModule {
         dialogService: DialogService,
         addFilterUseCase: AddFilterUseCase,
         removeFilterUseCase: RemoveFilterUseCase,
-        clearFilterUseCase: ClearFilterUseCase
+        clearFilterUseCase: ClearFilterUseCase,
+        getCategoriesUseCase: GetCategoriesUseCase
     ): FavouriteViewModel {
         return FavouriteViewModel(
             jokeDeleteUseCase,
@@ -51,7 +52,9 @@ class PresentationModule {
             dialogService,
             addFilterUseCase,
             removeFilterUseCase,
-            clearFilterUseCase
+            clearFilterUseCase,
+            getCategoriesUseCase
+
         )
     }
 
