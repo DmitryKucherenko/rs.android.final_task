@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.view.forEach
 import androidx.core.view.get
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
 import com.fatalzero.rsandroidfinal_task.R
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
-import com.fatalzero.rsandroidfinal_task.domain.model.Filters
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
@@ -38,8 +39,6 @@ class FavouriteListFragment : Fragment() {
     private var favoriteRecyclerView: RecyclerView? = null
     private var searchTextView: EditText? = null
     private var addButton: FloatingActionButton? = null
-    private lateinit var searchLiveData: LiveData<List<Joke>>
-    private val filtersArray by lazy { resources.getStringArray(R.array.filters_array) }
     private val component by lazy {
         (requireActivity().application as App).appComponent
     }
@@ -65,7 +64,7 @@ class FavouriteListFragment : Fragment() {
     }
 
     private fun search(query: String) {
-       viewModel.searchJoke(query)
+        viewModel.searchJoke(query)
     }
 
 
@@ -77,22 +76,23 @@ class FavouriteListFragment : Fragment() {
             chipGroupView = binding.chipGroup
         }
 
-
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
         navController = findNavController()
 
     }
 
 
-    private fun setChipGroup(chipGroup: ChipGroup?) {
-        for (i in filtersArray.indices) {
-            val filter = Filters.values()[i]
+    private fun setChipGroup(chipGroup: ChipGroup?, filters: List<String>) {
+
+        for (i in filters.indices) {
+            val filter = filters[i]
             val chip = (
                     layoutInflater
                         .inflate(R.layout.filter_chip_item, chipGroup, false)) as Chip
             chip.apply {
-                text = filtersArray[i]
-                id = filter.ordinal
+                text = filter
+                id = i
+                if(filter=="Any")isChecked=true
                 setChipListener(this, filter)
                 chipGroup?.addView(this)
             }
@@ -101,22 +101,23 @@ class FavouriteListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("REPO","SHOW")
+        Log.d("REPO", "SHOW")
     }
 
-    private fun setChipListener(chip: Chip, filter: Filters) =
+    private fun setChipListener(chip: Chip, filter: String) =
         chip.setOnCheckedChangeListener { _, isChecked ->
             val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
             when {
-                filter == Filters.Any &&
+                filter == "Any" &&
                         filter !in checkedFilters && isChecked -> viewModel.clearFilter()
                 filter !in checkedFilters && isChecked -> viewModel.addFilter(filter)
-                filter in checkedFilters && !isChecked && filter != Filters.Any-> viewModel.removeFilter(filter)
+                filter in checkedFilters && !isChecked && filter != "Any" -> viewModel.removeFilter(
+                    filter
+                )
             }
         }
 
     private fun setupListener() {
-        setChipGroup(chipGroupView)
 
         addButton?.setOnClickListener {
             navController?.navigate(
@@ -127,7 +128,7 @@ class FavouriteListFragment : Fragment() {
 
         }
         searchTextView?.addTextChangedListener(
-            DebouncingTextWatcher.getWatcher(lifecycleScope) {search(it.toString()) }
+            DebouncingTextWatcher.getWatcher(lifecycleScope) { search(it.toString()) }
         )
 
         favoriteItemClickListener = object : FauvItemClickListener {
@@ -155,20 +156,24 @@ class FavouriteListFragment : Fragment() {
         favoriteRecyclerView?.adapter = adapter
     }
 
-    private fun udateChipGroup(filters: List<Filters>, chipGroupView: ChipGroup) {
-        val anyChip = chipGroupView[Filters.Any.ordinal] as Chip
-        val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
-        if (checkedFilters.contains(Filters.Any)) {
+    private fun udateChipGroup(filters: List<String>, chipGroupView: ChipGroup) {
+        if (chipGroupView.size == 0) return
+        val anyChip = chipGroupView[0] as Chip
+        if (filters.contains("Any")) {
             chipGroupView.clearCheck()
             anyChip.isChecked = true
             anyChip.isEnabled = false
         } else {
-            checkedFilters.forEach {
-                chipGroupView.check(it.ordinal)
+            chipGroupView.forEach {
+
+                val chip = it as Chip
+                if (filters.contains(chip.text)) chip.isChecked = true
             }
-            anyChip.isChecked = false
-            anyChip.isEnabled = true
+
         }
+        anyChip.isChecked = false
+        anyChip.isEnabled = true
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -176,6 +181,15 @@ class FavouriteListFragment : Fragment() {
         viewModel.clearFilter()
         initView()
         setupListener()
+
+
+        viewModel.getCategory().observe(
+            viewLifecycleOwner
+        ) {category->
+            val categoryWithAny = category.toMutableList()
+            categoryWithAny.add(0, "Any")
+            setChipGroup(chipGroupView, categoryWithAny)
+        }
 
         viewModel.listDbLiveData.observe(
             viewLifecycleOwner
