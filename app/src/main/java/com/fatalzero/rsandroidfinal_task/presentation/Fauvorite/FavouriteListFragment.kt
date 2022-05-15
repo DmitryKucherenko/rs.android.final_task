@@ -83,7 +83,7 @@ class FavouriteListFragment : Fragment() {
 
 
     private fun setChipGroup(chipGroup: ChipGroup?, filters: List<String>) {
-
+        chipGroup?.removeAllViews()
         for (i in filters.indices) {
             val filter = filters[i]
             val chip = (
@@ -92,7 +92,7 @@ class FavouriteListFragment : Fragment() {
             chip.apply {
                 text = filter
                 id = i
-                if(filter=="Any")isChecked=true
+                if (filter == "Any") isChecked = true
                 setChipListener(this, filter)
                 chipGroup?.addView(this)
             }
@@ -185,10 +185,11 @@ class FavouriteListFragment : Fragment() {
 
         viewModel.getCategory().observe(
             viewLifecycleOwner
-        ) {category->
+        ) { category ->
             val categoryWithAny = category.toMutableList()
             categoryWithAny.add(0, "Any")
             setChipGroup(chipGroupView, categoryWithAny)
+            viewModel.checkedFilters.value?.let { udateChipGroup(it,chipGroupView) }
         }
 
         viewModel.listDbLiveData.observe(
