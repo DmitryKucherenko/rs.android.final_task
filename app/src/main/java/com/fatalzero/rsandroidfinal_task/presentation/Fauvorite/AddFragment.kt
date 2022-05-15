@@ -68,7 +68,7 @@ class AddFragment : Fragment() {
     }
 
     private fun launchAddMode() {
-        binding.imageButton.setOnClickListener {
+        binding.saveButton.setOnClickListener {
             viewModel.save(
                 Joke(
                     id = GenID.generateId(),
@@ -85,7 +85,7 @@ class AddFragment : Fragment() {
             binding.editCategory.setText(it.category)
             binding.JokeTextMultiLine.setText(it.joke)
         })
-        binding.imageButton.setOnClickListener {
+        binding.saveButton.setOnClickListener {
             val jokeEdit = viewModel.joke.value?.copy(
                 category = binding.editCategory.text.toString(),
                 joke = binding.JokeTextMultiLine.text.toString()

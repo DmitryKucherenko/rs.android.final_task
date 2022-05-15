@@ -46,4 +46,8 @@
         <item name="android:popupBackground">#DFFFFFFF</item>
     </style>
 
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

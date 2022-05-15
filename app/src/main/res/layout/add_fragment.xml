@@ -11,51 +11,58 @@
 
     <EditText
         android:id="@+id/JokeTextMultiLine"
-        style="@style/Widget.AppCompat.AutoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
 
+        android:layout_marginBottom="16dp"
         android:background="@drawable/back"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/joke_s_text"
+
         android:inputType="textMultiLine"
         android:lines="10"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/save_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCategory"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/edit"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        style="@style/ImageButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/save_buton"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:src="@android:drawable/ic_menu_save"
-        app:layout_constraintEnd_toEndOf="@+id/JokeTextMultiLine"
-        app:layout_constraintTop_toBottomOf="@+id/JokeTextMultiLine" />
-
-    <EditText
-        android:id="@+id/editCategory"
-        android:hint="@string/joke_s_category"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/back"
-        android:contentDescription="@string/type_category"
+        android:hint="@string/type_category"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editCategory"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/save_button"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="?colorSecondary"
+        android:text="Save"
+        app:icon="@drawable/ic_save_fill0_wght400_grad0_opsz20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/JokeTextMultiLine" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
