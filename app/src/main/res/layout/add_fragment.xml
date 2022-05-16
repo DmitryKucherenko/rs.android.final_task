@@ -16,7 +16,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
 
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="200dp"
         android:background="@drawable/back"
         android:ems="10"
         android:gravity="start|top"
@@ -65,6 +65,15 @@
         app:icon="@drawable/ic_save_fill0_wght400_grad0_opsz20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/JokeTextMultiLine" />
+
+    <com.fatalzero.rsandroidfinal_task.presentation.customView.ChipPanel
+        android:id="@+id/chip_panel"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="28dp"
+        app:chipCount="5"
+        app:layout_constraintTop_toBottomOf="@+id/JokeTextMultiLine"
+        tools:layout_editor_absoluteX="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
