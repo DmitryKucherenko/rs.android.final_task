@@ -1,16 +1,11 @@
 package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import androidx.core.view.forEach
-import androidx.core.view.get
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -18,19 +13,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fatalzero.rsandroidfinal_task.App
-import com.fatalzero.rsandroidfinal_task.R
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
 import com.fatalzero.rsandroidfinal_task.presentation.customView.ChipPanel
+import com.fatalzero.rsandroidfinal_task.utils.Constants.ANY
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.utils.DebouncingTextWatcher
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import javax.inject.Inject
+
 
 class FavouriteListFragment : Fragment() {
     private var _binding: FauvoriteJokeListFragmentBinding? = null
@@ -43,17 +37,10 @@ class FavouriteListFragment : Fragment() {
     private val component by lazy {
         (requireActivity().application as App).appComponent
     }
-
     private var chipPanelView:ChipPanel? = null
-
-
-
-
     private var adapter: FJokeAdapter? = null
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[FavouriteViewModel::class.java]
     }
@@ -79,31 +66,18 @@ class FavouriteListFragment : Fragment() {
             addButton = floatingActionButton
             chipPanelView = binding.chipPanel
         }
-
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
         navController = findNavController()
-
     }
-
-
-
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("REPO", "SHOW")
-    }
-
 
 
     private fun setupListener() {
-
         addButton?.setOnClickListener {
             navController?.navigate(
                 FavouriteListFragmentDirections.actionBookMarksFragmentToAddFragment(
                     UNDEFINED_ID
                 )
             )
-
         }
 
 
@@ -111,10 +85,10 @@ class FavouriteListFragment : Fragment() {
             chip.setOnCheckedChangeListener { _, isChecked ->
                 val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
                 when {
-                    filter == "Any" &&
+                    filter == ANY &&
                             filter !in checkedFilters && isChecked -> viewModel.clearFilter()
                     filter !in checkedFilters && isChecked -> viewModel.addFilter(filter)
-                    filter in checkedFilters && !isChecked && filter != "Any" -> viewModel.removeFilter(
+                    filter in checkedFilters && !isChecked && filter != ANY -> viewModel.removeFilter(
                         filter
                     )
                 }
@@ -165,7 +139,7 @@ class FavouriteListFragment : Fragment() {
             viewLifecycleOwner
         ) { category ->
             val categoryWithAny = category.toMutableList()
-            categoryWithAny.add(0, "Any")
+            categoryWithAny.add(0, ANY)
             chipPanelView?.setChipGroup(categoryWithAny)
             viewModel.checkedFilters.value?.let { chipPanelView?.udateChipGroup(it) }
         }
@@ -181,7 +155,6 @@ class FavouriteListFragment : Fragment() {
         viewModel.checkedFilters.observe(viewLifecycleOwner) { filters ->
             chipPanelView?.udateChipGroup(filters,)
         }
-
     }
 
     override fun onDestroyView() {

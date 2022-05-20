@@ -65,12 +65,12 @@ class DataModule {
     }
 
     @Provides
-    fun provideRemoveFilterUseCase(repository:JokesListRepository): RemoveFilterUseCase {
+    fun provideRemoveFilterUseCase(repository: JokesListRepository): RemoveFilterUseCase {
         return RemoveFilterUseCase(repository)
     }
 
     @Provides
-    fun provideClearFilterUseCase(repository:JokesListRepository): ClearFilterUseCase {
+    fun provideClearFilterUseCase(repository: JokesListRepository): ClearFilterUseCase {
         return ClearFilterUseCase(repository)
     }
 

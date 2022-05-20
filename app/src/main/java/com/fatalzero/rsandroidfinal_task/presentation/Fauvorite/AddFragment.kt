@@ -24,7 +24,6 @@ class AddFragment : Fragment() {
     private var _binding: AddFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var navController: NavController
-
     private val args by navArgs<AddFragmentArgs>()
     private val jokeId by lazy { args.jokeId }
 
@@ -86,7 +85,6 @@ class AddFragment : Fragment() {
                 category = binding.editCategory.text.toString(),
                 joke = binding.JokeTextMultiLine.text.toString()
             )
-            Log.d("REPO", "${jokeEdit}")
             viewModel.save(jokeEdit)
         }
     }

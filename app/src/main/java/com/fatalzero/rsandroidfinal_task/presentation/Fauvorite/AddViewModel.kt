@@ -1,6 +1,5 @@
 package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,6 @@ import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeGetUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSaveUseCase
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class AddViewModel(
     private var saveUseCase: JokeSaveUseCase,
@@ -25,7 +23,6 @@ class AddViewModel(
         get() = _joke
 
     fun save(joke: Joke?) {
-        Log.d("REPO","Save joke is ${joke}")
         viewModelScope.launch {
             saveUseCase(joke)
             _finish.postValue(true)
@@ -34,7 +31,7 @@ class AddViewModel(
 
     fun get(id: String) {
         viewModelScope.launch {
-                _joke.postValue(jokeGetUseCase(id))
+            _joke.postValue(jokeGetUseCase(id))
         }
     }
 }

@@ -29,26 +29,12 @@
     <string name="delete_button">delete button</string>
     <string name="edit_buton">edit_buton</string>
 
-    <string name="any_filter">Any</string>
-    <string name="programming_filter">Programming</string>
-    <string name="misc_filter">Misc</string>
-    <string name="dark_filter">Dark</string>
-    <string name="pun_filter">Pun</string>
-    <string name="spooky_filter">Spooky</string>
-    <string name="christmas_filter">Christmas</string>
+
     <string name="joke_s_text">Joke\'s Text</string>
     <string name="joke_s_category">Joke\'s Category</string>
     <string name="type_category">type category</string>
     <string name="save">Save</string>
 
-    <string-array name="filters_array">
-        <item>@string/any_filter</item>
-        <item>@string/programming_filter</item>
-        <item>@string/misc_filter</item>
-        <item>@string/dark_filter</item>
-        <item>@string/pun_filter</item>
-        <item>@string/spooky_filter</item>
-        <item>@string/christmas_filter</item>
-    </string-array>
+
 
 </resources>

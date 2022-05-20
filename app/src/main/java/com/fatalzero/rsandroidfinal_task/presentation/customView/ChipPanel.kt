@@ -1,20 +1,22 @@
 package com.fatalzero.rsandroidfinal_task.presentation.customView
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.CompoundButton
 import android.widget.HorizontalScrollView
 import androidx.core.view.forEach
 import androidx.core.view.get
 import androidx.core.view.size
 import com.fatalzero.rsandroidfinal_task.R
 import com.fatalzero.rsandroidfinal_task.databinding.ChipPanelBinding
+import com.fatalzero.rsandroidfinal_task.utils.Constants.ANY
+import com.fatalzero.rsandroidfinal_task.utils.Constants.DEF_COLOR
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
-const val ANY=""
-typealias OnChipButtonsActionListener = (chip: Chip, filter: String)-> Unit
+typealias OnChipButtonsActionListener = (chip: Chip, filter: String) -> Unit
 
 class ChipPanel(
     context: Context,
@@ -38,6 +40,7 @@ class ChipPanel(
     private var layoutInflater: LayoutInflater
     private var listener: OnChipButtonsActionListener? = null
     private var chipGroupView: ChipGroup? = null
+    private var backgroundItem: Int = 0
 
 
     init {
@@ -51,11 +54,12 @@ class ChipPanel(
         if (attrs == null) return
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.ChipPanel, defStyleAttr, defStyleRes)
-            chipGroupView = binding.chipGroup
+        chipGroupView = binding.chipGroup
+        backgroundItem = typedArray.getInt(R.styleable.ChipPanel_chipItemBackground,  DEF_COLOR)
         typedArray.recycle()
     }
 
-    fun setChipGroup( filters: List<String>) {
+    fun setChipGroup(filters: List<String>) {
         chipGroupView?.removeAllViews()
         for (i in filters.indices) {
             val filter = filters[i]
@@ -65,9 +69,11 @@ class ChipPanel(
             chip.apply {
                 text = filter
                 id = i
-                if (filter == "Any") isChecked = true
+                if (filter == ANY) isChecked = true
                 setChipListener(this, filter)
                 chipGroupView?.addView(this)
+                chipBackgroundColor.apply { if(backgroundItem!=DEF_COLOR) ColorStateList.valueOf(backgroundItem) }
+
             }
         }
     }
@@ -75,7 +81,7 @@ class ChipPanel(
     fun udateChipGroup(filters: List<String>) {
         if (chipGroupView?.size == 0) return
         val anyChip = chipGroupView?.get(0) as Chip
-        if (filters.contains("Any")) {
+        if (filters.contains(ANY)) {
             chipGroupView?.clearCheck()
             anyChip.isChecked = true
             anyChip.isEnabled = false
@@ -87,16 +93,12 @@ class ChipPanel(
         }
         anyChip.isChecked = false
         anyChip.isEnabled = true
-
-
     }
 
-    fun setListener(listener:OnChipButtonsActionListener?){
+    fun setListener(listener: OnChipButtonsActionListener?) {
         this.listener = listener
     }
 
-   private fun setChipListener(chip: Chip, filter: String) =listener?.invoke(chip,filter)
-
-
+    private fun setChipListener(chip: Chip, filter: String) = listener?.invoke(chip, filter)
 
 }

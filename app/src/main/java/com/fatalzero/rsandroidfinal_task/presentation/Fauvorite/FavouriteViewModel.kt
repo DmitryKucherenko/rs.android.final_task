@@ -1,9 +1,10 @@
 package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.usecase.*
+import com.fatalzero.rsandroidfinal_task.utils.Constants.ANY
+import com.fatalzero.rsandroidfinal_task.utils.Constants.DEF_SEARCH_QUERY
 import com.fatalzero.rsandroidfinal_task.utils.dialog.DialogService
 import kotlinx.coroutines.launch
 
@@ -18,12 +19,9 @@ class FavouriteViewModel(
     private var getCategoriesUseCase: GetCategoriesUseCase
     ) : ViewModel() {
 
-
-
-    private var _checkedFilters = MutableLiveData(mutableListOf("Any"))
+    private var _checkedFilters = MutableLiveData(mutableListOf(ANY))
     val checkedFilters: LiveData<MutableList<String>> get() = _checkedFilters
-    private var searchQuery = MutableLiveData("%%")
-
+    private var searchQuery = MutableLiveData(DEF_SEARCH_QUERY)
 
     var listDbLiveData = Transformations.switchMap(DoubleTrigger(_checkedFilters, searchQuery)) {
         jokeSearchUseCase(searchQuery.value ?: "")
@@ -56,10 +54,9 @@ class FavouriteViewModel(
 
 
     fun addFilter(filter: String) {
-        Log.d("REPO", "addFilter $filter")
         val filters = checkedFilters.value
         filters?.apply {
-            remove("Any")
+            remove(ANY)
             add(filter)
         }
         addFilterUseCase(filter)
@@ -67,12 +64,11 @@ class FavouriteViewModel(
     }
 
     fun removeFilter(filter: String) {
-        Log.d("REPO", "remove filter: $filter")
         removeFilterUseCase(filter)
         val filters = checkedFilters.value
 
         filters?.apply {
-            if (size == 1) _checkedFilters.value = mutableListOf("Any")
+            if (size == 1) _checkedFilters.value = mutableListOf(ANY)
             else {
                 remove(filter)
                 _checkedFilters.value = this
@@ -81,9 +77,8 @@ class FavouriteViewModel(
     }
 
     fun clearFilter() {
-        Log.d("REPO", "clear filter")
         clearFilterUseCase()
-       _checkedFilters.value = mutableListOf("Any")
+       _checkedFilters.value = mutableListOf(ANY)
     }
 }
 

@@ -1,13 +1,12 @@
 package com.fatalzero.rsandroidfinal_task.presentation
 
 import androidx.lifecycle.ViewModel
+import com.fatalzero.rsandroidfinal_task.domain.model.UserSettings
 import com.fatalzero.rsandroidfinal_task.domain.usecase.GetSettingsUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.SaveSettingsUseCase
-import com.fatalzero.rsandroidfinal_task.domain.model.UserSettings
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import javax.inject.Inject
 
 class MainActivityViewModel(
     private var getSettingsUseCase: GetSettingsUseCase,
