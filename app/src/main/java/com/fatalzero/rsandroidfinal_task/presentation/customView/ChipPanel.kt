@@ -14,6 +14,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
 const val ANY=""
+typealias OnChipButtonsActionListener = (chip: Chip, filter: String)-> Unit
 
 class ChipPanel(
     context: Context,
@@ -34,12 +35,14 @@ class ChipPanel(
 
 
     private val binding: ChipPanelBinding
-    private var count: Int = 0
-    private var inflater: LayoutInflater
+    private var layoutInflater: LayoutInflater
+    private var listener: OnChipButtonsActionListener? = null
+    private var chipGroupView: ChipGroup? = null
+
 
     init {
-        inflater = LayoutInflater.from(context)
-        inflater.inflate(R.layout.chip_panel, this, true)
+        layoutInflater = LayoutInflater.from(context)
+        layoutInflater.inflate(R.layout.chip_panel, this, true)
         binding = ChipPanelBinding.bind(this)
         initializeAttributes(attrs, defStyleAttr, defStyleRes)
     }
@@ -48,63 +51,52 @@ class ChipPanel(
         if (attrs == null) return
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.ChipPanel, defStyleAttr, defStyleRes)
-        with(binding) {
-            count = typedArray.getInt(R.styleable.ChipPanel_chipCount, 0)
-            buildChips(count)
-
-        }
+            chipGroupView = binding.chipGroup
         typedArray.recycle()
     }
 
-    private fun buildChips(count: Int) {
-
-        var chipGroup = binding.chipGroup
-        for (i in 0..count) {
-
+    fun setChipGroup( filters: List<String>) {
+        chipGroupView?.removeAllViews()
+        for (i in filters.indices) {
+            val filter = filters[i]
             val chip = (
-                    inflater
-                        .inflate(R.layout.filter_chip_item, chipGroup, false)) as Chip
+                    layoutInflater
+                        .inflate(R.layout.filter_chip_item, chipGroupView, false)) as Chip
             chip.apply {
-                text = "Item $i"
+                text = filter
                 id = i
-
-                chipGroup.addView(this)
+                if (filter == "Any") isChecked = true
+                setChipListener(this, filter)
+                chipGroupView?.addView(this)
             }
         }
     }
 
-    private fun udateChipGroup(filters: List<String>, chipGroupView: ChipGroup) {
-        if (chipGroupView.size == 0) return
-        val anyChip = chipGroupView[0] as Chip
+    fun udateChipGroup(filters: List<String>) {
+        if (chipGroupView?.size == 0) return
+        val anyChip = chipGroupView?.get(0) as Chip
         if (filters.contains("Any")) {
-            chipGroupView.clearCheck()
+            chipGroupView?.clearCheck()
             anyChip.isChecked = true
             anyChip.isEnabled = false
         } else {
-            chipGroupView.forEach {
-
+            chipGroupView?.forEach {
                 val chip = it as Chip
                 if (filters.contains(chip.text)) chip.isChecked = true
             }
-
         }
         anyChip.isChecked = false
         anyChip.isEnabled = true
-        var test: (CompoundButton, Boolean)->Unit
+
 
     }
 
-    private fun setChipListener(chip: Chip, filter: String,checkedListener:(CompoundButton, Boolean)->Unit) =
-        chip.setOnCheckedChangeListener { _, isChecked ->
-            val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
-            when {
-                filter == "Any" &&
-                        filter !in checkedFilters && isChecked -> viewModel.clearFilter()
-                filter !in checkedFilters && isChecked -> viewModel.addFilter(filter)
-                filter in checkedFilters && !isChecked && filter != "Any" -> viewModel.removeFilter(
-                    filter
-                )
-            }
-        }
+    fun setListener(listener:OnChipButtonsActionListener?){
+        this.listener = listener
+    }
+
+   private fun setChipListener(chip: Chip, filter: String) =listener?.invoke(chip,filter)
+
+
 
 }

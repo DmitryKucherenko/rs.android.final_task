@@ -23,6 +23,7 @@ import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBi
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
+import com.fatalzero.rsandroidfinal_task.presentation.customView.ChipPanel
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.utils.DebouncingTextWatcher
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
@@ -43,7 +44,10 @@ class FavouriteListFragment : Fragment() {
         (requireActivity().application as App).appComponent
     }
 
-    private lateinit var chipGroupView: ChipGroup
+    private var chipPanelView:ChipPanel? = null
+
+
+
 
     private var adapter: FJokeAdapter? = null
 
@@ -73,7 +77,7 @@ class FavouriteListFragment : Fragment() {
             searchTextView = searchText
             favoriteRecyclerView = jokeRecyclerView
             addButton = floatingActionButton
-            chipGroupView = binding.chipGroup
+            chipPanelView = binding.chipPanel
         }
 
         favoriteRecyclerView?.layoutManager = LinearLayoutManager(context)
@@ -82,40 +86,14 @@ class FavouriteListFragment : Fragment() {
     }
 
 
-    private fun setChipGroup(chipGroup: ChipGroup?, filters: List<String>) {
-        chipGroup?.removeAllViews()
-        for (i in filters.indices) {
-            val filter = filters[i]
-            val chip = (
-                    layoutInflater
-                        .inflate(R.layout.filter_chip_item, chipGroup, false)) as Chip
-            chip.apply {
-                text = filter
-                id = i
-                if (filter == "Any") isChecked = true
-                setChipListener(this, filter)
-                chipGroup?.addView(this)
-            }
-        }
-    }
+
 
     override fun onResume() {
         super.onResume()
         Log.d("REPO", "SHOW")
     }
 
-    private fun setChipListener(chip: Chip, filter: String) =
-        chip.setOnCheckedChangeListener { _, isChecked ->
-            val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
-            when {
-                filter == "Any" &&
-                        filter !in checkedFilters && isChecked -> viewModel.clearFilter()
-                filter !in checkedFilters && isChecked -> viewModel.addFilter(filter)
-                filter in checkedFilters && !isChecked && filter != "Any" -> viewModel.removeFilter(
-                    filter
-                )
-            }
-        }
+
 
     private fun setupListener() {
 
@@ -127,6 +105,23 @@ class FavouriteListFragment : Fragment() {
             )
 
         }
+
+
+        chipPanelView?.setListener{ chip,filter->
+            chip.setOnCheckedChangeListener { _, isChecked ->
+                val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
+                when {
+                    filter == "Any" &&
+                            filter !in checkedFilters && isChecked -> viewModel.clearFilter()
+                    filter !in checkedFilters && isChecked -> viewModel.addFilter(filter)
+                    filter in checkedFilters && !isChecked && filter != "Any" -> viewModel.removeFilter(
+                        filter
+                    )
+                }
+            }
+
+        }
+
         searchTextView?.addTextChangedListener(
             DebouncingTextWatcher.getWatcher(lifecycleScope) { search(it.toString()) }
         )
@@ -156,29 +151,12 @@ class FavouriteListFragment : Fragment() {
         favoriteRecyclerView?.adapter = adapter
     }
 
-    private fun udateChipGroup(filters: List<String>, chipGroupView: ChipGroup) {
-        if (chipGroupView.size == 0) return
-        val anyChip = chipGroupView[0] as Chip
-        if (filters.contains("Any")) {
-            chipGroupView.clearCheck()
-            anyChip.isChecked = true
-            anyChip.isEnabled = false
-        } else {
-            chipGroupView.forEach {
 
-                val chip = it as Chip
-                if (filters.contains(chip.text)) chip.isChecked = true
-            }
-
-        }
-        anyChip.isChecked = false
-        anyChip.isEnabled = true
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.clearFilter()
+
         initView()
         setupListener()
 
@@ -188,8 +166,8 @@ class FavouriteListFragment : Fragment() {
         ) { category ->
             val categoryWithAny = category.toMutableList()
             categoryWithAny.add(0, "Any")
-            setChipGroup(chipGroupView, categoryWithAny)
-            viewModel.checkedFilters.value?.let { udateChipGroup(it,chipGroupView) }
+            chipPanelView?.setChipGroup(categoryWithAny)
+            viewModel.checkedFilters.value?.let { chipPanelView?.udateChipGroup(it) }
         }
 
         viewModel.listDbLiveData.observe(
@@ -201,7 +179,7 @@ class FavouriteListFragment : Fragment() {
         }
 
         viewModel.checkedFilters.observe(viewLifecycleOwner) { filters ->
-            udateChipGroup(filters, chipGroupView)
+            chipPanelView?.udateChipGroup(filters,)
         }
 
     }

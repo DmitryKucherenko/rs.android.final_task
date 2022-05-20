@@ -1,25 +1,20 @@
 package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
-import androidx.lifecycle.ViewModelProvider
+
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.fatalzero.rsandroidfinal_task.App
-import com.fatalzero.rsandroidfinal_task.R
-
-
-import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.databinding.AddFragmentBinding
-import com.fatalzero.rsandroidfinal_task.domain.model.Filters
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
+import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.utils.GenID
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import javax.inject.Inject
@@ -56,7 +51,7 @@ class AddFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
-        binding.chipPanel
+
         viewModel.finish.observe(viewLifecycleOwner) {
             if (it) navController.popBackStack()
         }

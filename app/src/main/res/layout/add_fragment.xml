@@ -15,15 +15,14 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-
-        android:layout_marginBottom="200dp"
-        android:background="@drawable/back"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/joke_s_text"
-
         android:inputType="textMultiLine"
         android:lines="10"
+        android:textColor="@color/black"
+        android:background="?attr/colorSecondaryVariant"
         app:layout_constraintBottom_toTopOf="@+id/save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -46,10 +45,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editCategory"
             android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-
-            />
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,19 +57,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="?colorSecondary"
-        android:text="Save"
+        android:text="@string/save"
         app:icon="@drawable/ic_save_fill0_wght400_grad0_opsz20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/JokeTextMultiLine" />
-
-    <com.fatalzero.rsandroidfinal_task.presentation.customView.ChipPanel
-        android:id="@+id/chip_panel"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginTop="28dp"
-        app:chipCount="5"
-        app:layout_constraintTop_toBottomOf="@+id/JokeTextMultiLine"
-        tools:layout_editor_absoluteX="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

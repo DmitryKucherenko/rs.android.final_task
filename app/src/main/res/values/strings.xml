@@ -39,6 +39,7 @@
     <string name="joke_s_text">Joke\'s Text</string>
     <string name="joke_s_category">Joke\'s Category</string>
     <string name="type_category">type category</string>
+    <string name="save">Save</string>
 
     <string-array name="filters_array">
         <item>@string/any_filter</item>
