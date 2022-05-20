@@ -15,9 +15,9 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-
+        android:background="?attr/colorSecondaryVariant"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/back"
+        android:textColor="@color/black"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/joke_s_text"
