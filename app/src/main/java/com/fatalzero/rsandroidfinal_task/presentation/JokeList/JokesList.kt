@@ -1,7 +1,6 @@
 package com.fatalzero.rsandroidfinal_task.presentation.JokeList
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -21,19 +20,15 @@ import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokeAdapt
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.LoaderStateAdapter
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
-import java.lang.Exception
 import javax.inject.Inject
 
 class JokesList : Fragment() {
     private var jokeRecyclerView: RecyclerView? = null
-
     private val component by lazy {
         (requireActivity().application as App).appComponent
     }
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[JokesListViewModel::class.java]
     }
@@ -48,7 +43,6 @@ class JokesList : Fragment() {
         component.inject(this)
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        Log.d("JokesListViewModel", "createListFragment")
     }
 
     override fun onCreateView(
@@ -85,7 +79,6 @@ class JokesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
 
             viewModel.jokeFlowData.collectLatest { pagingData ->
@@ -113,6 +106,8 @@ class JokesList : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 
 
 }

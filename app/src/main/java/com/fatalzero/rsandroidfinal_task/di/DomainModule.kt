@@ -50,4 +50,11 @@ class DomainModule {
 
 
 
+    @Provides
+    fun provideGetCategoriesUseCase(jokeListRepository: JokesListRepository):GetCategoriesUseCase{
+        return GetCategoriesUseCase(jokeListRepository)
+    }
+
+
+
 }

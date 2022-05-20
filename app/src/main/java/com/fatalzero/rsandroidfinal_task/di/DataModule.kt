@@ -10,6 +10,10 @@ import javax.inject.Singleton
 import com.fatalzero.rsandroidfinal_task.data.network.ApiService
 import com.fatalzero.rsandroidfinal_task.data.repository.JokesListRepositoryImpl
 import com.fatalzero.rsandroidfinal_task.data.repository.SettingsRepositoryImpl
+import com.fatalzero.rsandroidfinal_task.domain.repository.JokesListRepository
+import com.fatalzero.rsandroidfinal_task.domain.usecase.AddFilterUseCase
+import com.fatalzero.rsandroidfinal_task.domain.usecase.ClearFilterUseCase
+import com.fatalzero.rsandroidfinal_task.domain.usecase.RemoveFilterUseCase
 import com.fatalzero.rsandroidfinal_task.utils.ShowMessage
 
 @Module
@@ -45,6 +49,7 @@ class DataModule {
         return SettingsRepositoryImpl(context, showMessage)
     }
 
+    @Singleton
     @Provides
     fun provideJokesListRepositoryImpl(
         jokesApiService: ApiService,
@@ -54,5 +59,19 @@ class DataModule {
         return JokesListRepositoryImpl(jokesApiService, context, message)
     }
 
+    @Provides
+    fun provideAddFilterUseCase(repository: JokesListRepository): AddFilterUseCase {
+        return AddFilterUseCase(repository)
+    }
+
+    @Provides
+    fun provideRemoveFilterUseCase(repository:JokesListRepository): RemoveFilterUseCase {
+        return RemoveFilterUseCase(repository)
+    }
+
+    @Provides
+    fun provideClearFilterUseCase(repository:JokesListRepository): ClearFilterUseCase {
+        return ClearFilterUseCase(repository)
+    }
 
 }
