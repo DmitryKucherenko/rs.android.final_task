@@ -7,7 +7,6 @@ interface SendJoke {
     fun sendJoke(joke: Joke?)
 }
 
-
 class JokeSendUseCase (private var sendJokeService: SendJoke) {
     fun execute(joke: Joke?) {
         sendJokeService.sendJoke(joke)

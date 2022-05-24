@@ -9,7 +9,6 @@ import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeGetUseCase
 import com.fatalzero.rsandroidfinal_task.domain.usecase.JokeSaveUseCase
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class AddViewModel(
     private var saveUseCase: JokeSaveUseCase,
@@ -25,7 +24,6 @@ class AddViewModel(
         get() = _joke
 
     fun save(joke: Joke?) {
-        Log.d("REPO","Save joke is ${joke}")
         viewModelScope.launch {
             saveUseCase(joke)
             _finish.postValue(true)

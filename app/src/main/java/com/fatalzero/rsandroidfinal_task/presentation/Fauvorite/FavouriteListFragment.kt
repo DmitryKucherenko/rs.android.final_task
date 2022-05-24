@@ -1,7 +1,6 @@
 package com.fatalzero.rsandroidfinal_task.presentation.Fauvorite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.core.view.forEach
 import androidx.core.view.get
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -23,6 +21,8 @@ import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeListFragmentBi
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FJokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.Fauvorite.adapter.FauvItemClickListener
+import com.fatalzero.rsandroidfinal_task.utils.Constants.ANY
+import com.fatalzero.rsandroidfinal_task.utils.Constants.NOT_SUPPORTED
 import com.fatalzero.rsandroidfinal_task.utils.Constants.UNDEFINED_ID
 import com.fatalzero.rsandroidfinal_task.utils.DebouncingTextWatcher
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
@@ -92,26 +92,21 @@ class FavouriteListFragment : Fragment() {
             chip.apply {
                 text = filter
                 id = i
-                if (filter == "Any") isChecked = true
+                if (filter == ANY) isChecked = true
                 setChipListener(this, filter)
                 chipGroup?.addView(this)
             }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("REPO", "SHOW")
-    }
-
     private fun setChipListener(chip: Chip, filter: String) =
         chip.setOnCheckedChangeListener { _, isChecked ->
             val checkedFilters = requireNotNull(viewModel.checkedFilters.value)
             when {
-                filter == "Any" &&
+                filter == ANY &&
                         filter !in checkedFilters && isChecked -> viewModel.clearFilter()
                 filter !in checkedFilters && isChecked -> viewModel.addFilter(filter)
-                filter in checkedFilters && !isChecked && filter != "Any" -> viewModel.removeFilter(
+                filter in checkedFilters && !isChecked && filter != ANY -> viewModel.removeFilter(
                     filter
                 )
             }
@@ -137,7 +132,7 @@ class FavouriteListFragment : Fragment() {
             }
 
             override fun onSaveItemClick(joke: Joke?) {
-                throw Exception("NOT SUPPORTED!")
+                throw Exception(NOT_SUPPORTED)
             }
 
             override fun onEditItemClick(id: String) {
@@ -159,17 +154,15 @@ class FavouriteListFragment : Fragment() {
     private fun udateChipGroup(filters: List<String>, chipGroupView: ChipGroup) {
         if (chipGroupView.size == 0) return
         val anyChip = chipGroupView[0] as Chip
-        if (filters.contains("Any")) {
+        if (filters.contains(ANY)) {
             chipGroupView.clearCheck()
             anyChip.isChecked = true
             anyChip.isEnabled = false
         } else {
             chipGroupView.forEach {
-
                 val chip = it as Chip
                 if (filters.contains(chip.text)) chip.isChecked = true
             }
-
         }
         anyChip.isChecked = false
         anyChip.isEnabled = true
@@ -187,9 +180,9 @@ class FavouriteListFragment : Fragment() {
             viewLifecycleOwner
         ) { category ->
             val categoryWithAny = category.toMutableList()
-            categoryWithAny.add(0, "Any")
+            categoryWithAny.add(0, ANY)
             setChipGroup(chipGroupView, categoryWithAny)
-            viewModel.checkedFilters.value?.let { udateChipGroup(it,chipGroupView) }
+            viewModel.checkedFilters.value?.let { udateChipGroup(it, chipGroupView) }
         }
 
         viewModel.listDbLiveData.observe(

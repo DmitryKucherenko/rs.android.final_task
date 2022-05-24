@@ -6,9 +6,6 @@ import androidx.core.content.ContextCompat.startActivity
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.domain.usecase.SendJoke
 
-
-
-
 class SendJokeImpl (private val context: Context) : SendJoke {
 
     private fun getBodyMessage(

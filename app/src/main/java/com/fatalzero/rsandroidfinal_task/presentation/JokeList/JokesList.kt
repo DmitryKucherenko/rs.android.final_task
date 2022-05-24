@@ -18,6 +18,7 @@ import com.fatalzero.rsandroidfinal_task.domain.model.Joke
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.ItemClickListener
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.JokeAdapter
 import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.LoaderStateAdapter
+import com.fatalzero.rsandroidfinal_task.utils.Constants.NOT_SUPPORTED
 import com.fatalzero.rsandroidfinal_task.utils.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -27,6 +28,7 @@ class JokesList : Fragment() {
     private val component by lazy {
         (requireActivity().application as App).appComponent
     }
+
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private val viewModel by lazy {
@@ -63,7 +65,7 @@ class JokesList : Fragment() {
             }
 
             override fun onDeleteItemClick(joke: Joke?) {
-                throw Exception("NOT SUPPORTED!")
+                throw Exception(NOT_SUPPORTED)
             }
         }
 
@@ -106,8 +108,6 @@ class JokesList : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 
 
 }

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.fatalzero.rsandroidfinal_task.databinding.FauvoriteJokeItemBinding
 import com.fatalzero.rsandroidfinal_task.domain.model.Joke
-import com.fatalzero.rsandroidfinal_task.presentation.JokeList.adapter.ItemClickListener
 
 class FJokeAdapter(private val itemClickListener: FauvItemClickListener?) :
     ListAdapter<Joke, FJokeHolder>(DiffCallback) {

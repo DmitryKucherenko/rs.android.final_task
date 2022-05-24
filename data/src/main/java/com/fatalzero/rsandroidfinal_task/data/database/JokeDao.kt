@@ -22,9 +22,6 @@ interface JokeDao {
     @Query("SELECT * FROM jokedbmodel WHERE id=:id")
     suspend fun getJoke(id:String):JokeDbModel
 
-//    @Query("SELECT * FROM jokedbmodel WHERE (category IN (:filters) AND joke like :searchQuery) COLLATE NOCASE")
-//    fun search(searchQuery:String,filters:List<String>):LiveData<List<JokeDbModel>>
-
     @RawQuery (observedEntities = [JokeDbModel::class])
     fun search(searchQuery: SupportSQLiteQuery):LiveData<List<JokeDbModel>>
 

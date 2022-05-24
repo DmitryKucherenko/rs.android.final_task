@@ -10,8 +10,8 @@ class JokeMapper {
     companion object {
         private fun jokeNetToJoke(jokeNet: JokeNet) = Joke(
             joke = jokeNet.setup ?: jokeNet.joke ?: "",
-            id = jokeNet.id?: UNDEFINED_ID,
-            category = jokeNet.category?: ""
+            id = jokeNet.id ?: UNDEFINED_ID,
+            category = jokeNet.category ?: ""
         )
 
         fun mapJsonContainerToListJoke(listJokeNet: List<JokeNet>): List<Joke> {
@@ -22,10 +22,19 @@ class JokeMapper {
             return result
         }
 
-        fun jokeToJokeDbModel(joke: Joke?) = JokeDbModel(joke?.joke?:"", joke?.id?: UNDEFINED_ID, joke?.category?:"")
+        fun jokeToJokeDbModel(joke: Joke?) =
+            JokeDbModel(
+                joke?.joke ?: "",
+                joke?.id ?: UNDEFINED_ID,
+                joke?.category ?: ""
+            )
 
         fun jokeDbModelToJoke(jokeDbModel: JokeDbModel?) =
-            Joke(jokeDbModel?.joke?:"", jokeDbModel?.id?:UNDEFINED_ID, jokeDbModel?.category?:"")
+            Joke(
+                jokeDbModel?.joke ?: "",
+                jokeDbModel?.id ?: UNDEFINED_ID,
+                jokeDbModel?.category ?: ""
+            )
 
 
     }
